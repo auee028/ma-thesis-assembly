@@ -1,0 +1,21 @@
+<mujoco model="pentagon">
+  <asset>
+    <mesh file="pentagon_prism_block.obj" name="pentagon_prism_mesh" scale="1 1 1"/>
+    <material name="pentagon_prism_mat" reflectance="0.5" rgba="0.5 0.5 0.5 1"/>
+  </asset>
+  <worldbody>
+    <body>
+      <body name="object">
+        <!-- <geom pos="0 0 0" mesh="pentagon_prism_mesh" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="50" friction="0.95 0.3 0.1" material="pentagon_prism_mat" group="0" condim="4"/> -->
+        <!-- <geom pos="0 0 0" mesh="pentagon_prism_mesh" type="mesh" solimp="0.9 0.95 0.001" solref="0.02 1.0" density="1000" friction="1 0.005 0.0001" material="pentagon_prism_mat" group="0" condim="4"/> -->
+        <geom pos="0 0 0" mesh="pentagon_prism_mesh" type="mesh" solimp="0.998 0.998 0.001" solref="0.001 1" density="50" friction="0.95 0.3 0.1" material="pentagon_prism_mat" group="0" condim="4"/>
+      </body>
+      <!-- Bottom site (centered at base) -->
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 -0.025" name="bottom_site"/>
+      <!-- Top site (apex point) -->
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 0.025" name="top_site"/>
+      <!-- Center of mass site -->
+      <site rgba="0 0 0 0" size="0.005" pos="0 0 0" name="horizontal_radius_site"/>
+    </body>
+  </worldbody>
+</mujoco>

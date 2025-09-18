@@ -1,0 +1,4 @@
+../../../data/demonstrations/icl_ex1/agentview_frame_0_rgbseg.png
+../../../data/demonstrations/icl_ex2/agentview_frame_0_rgbseg.png
+../../../data/demonstrations/icl_ex3/agentview_frame_0_rgbseg.png
+../../../data/demonstrations/icl_ex4/agentview_frame_0_rgbseg.png

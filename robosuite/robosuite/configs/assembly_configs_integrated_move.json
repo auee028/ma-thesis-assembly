@@ -1,0 +1,66 @@
+{
+    "env": {
+        "env_name": "BigPyramid",
+        "robots": "UR5e",
+        "has_renderer": false,
+        "has_offscreen_renderer": true,
+        "use_camera_obs": true,
+        "camera_heights": 256,
+        "camera_widths": 256,
+        "camera_names": ["frontview", "birdview", "agentview", "sideview"],
+        "camera_depths": ["frontview", "birdview", "agentview", "sideview"],
+        "camera_segmentations": "element",
+        "hard_reset": false,
+        "mujoco_passive_viewer": true,
+        "horizon": 5000
+    },
+    "task": {
+        "target_query_structure": "pyramid in a 2D plane",
+        "target_cam": "agentview",
+        "target_dir": "assembly_input_img",
+        "target_dir_tmp": "tmp",
+        "target_rgb_file": "target_rgb.png",
+        "target_depth_file": "target_depth.png",
+        "target_mask_file": "target_mask.png",
+        "target_rgbd_file": "target_rgbd.png",
+        "target_rgbseg_file": "target_rgbseg.png"
+    },
+    "llm": {
+        "api_keys": {
+            "openai": "$OPENAI_API_KEY",
+            "mistral": "$MISTRAL_API_KEY",
+            "google": "$GOOGLE_API_KEY"
+        },
+        "use_llamaindex": false,
+        "model_config": {
+            "provider": "openai",
+            "model": "gpt-4o-2024-08-06",
+            "top_p": 0.2
+        },
+        "token_log_dir": "../../../logs"
+    },
+    "which_img": "rgb_m",
+    "relation": {
+        "use_primitives": false,
+        "prim_prompt_files": {
+            "system_prompt": "../prompts/system_prompt_relation_primitives.txt",
+            "examples_prompt": "../prompts/examples_prompt.txt"
+        },
+        "dist_prompt_files": {
+            "examples_prompt": "../prompts/examples_prompt_dist.txt"
+        },
+        "example_images": {
+            "example_rgb_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_depth_paths": "../prompts/example_image_paths_depth.txt",
+            "example_mask_paths": "../prompts/example_image_paths_mask.txt",
+            "example_rgbd_paths": "../prompts/example_image_paths_rgbd.txt",
+            "example_rgbseg_paths": "../prompts/example_image_paths_rgbseg.txt"
+        }
+    },
+    "controller": {
+        "config_fpath": "../custom_utils/whole_body_ik_assembly.json"
+    },
+    "num_iter": 1,
+    "exp_id": "exp_qualitative",
+    "save_root": "./output_demo_passive_viewer"
+}

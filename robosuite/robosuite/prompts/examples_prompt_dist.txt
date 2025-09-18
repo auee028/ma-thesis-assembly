@@ -1,0 +1,84 @@
+### Example 1
+input_structure = 'tower'
+detected_blocks = [
+  {"block_id": "block0", "color": "orange", "size": "0.04"},
+  {"block_id": "block1", "color": "yellow", "size": "0.04"},
+  {"block_id": "block2", "color": "green", "size": "0.04"}
+]
+structure_relations = [
+  {
+    'from': 'block2',
+    'to': 'block1',
+    'center_distance': {'x': 0.0, 'y': 0.0, 'z': block_length}
+  },
+  {
+    'from': 'block2',
+    'to': 'block0',
+    'center_distance': {'x': 0.0, 'y': 0.0, 'z': block_length*2}
+  },
+  {
+    'from': 'block2',
+    'to': 'block3',
+    'center_distance': {'x': 0.0, 'y': 0.0, 'z': block_length*3}
+  }
+]    # block2 as the base block
+
+### Example 2
+input_structure = 'pyramid'
+detected_blocks = [
+  {"block_id": "block0", "color": "yellow", "size": "0.04"},
+  {"block_id": "block1", "color": "purple", "size": "0.04"},
+  {"block_id": "block2", "color": "orange", "size": "0.04"}
+]
+structure_relations = [
+  {
+    'from': 'block0',
+    'to': 'block2',
+    'center_distance': {'x': -block_length, 'y': 0.0, 'z': 0.0}
+  },
+  {
+    'from': 'block0',
+    'to': 'block1',
+    'center_distance': {'x': -block_length/2, 'y': 0.0, 'z': block_length}
+  }
+]    # block0 as the base block
+
+### Example 3
+input_structure = 'tower'
+detected_blocks = [
+  {"block_id": "block0", "color": "blue", "size": "0.04"},
+  {"block_id": "block1", "color": "red", "size": "0.04"}
+]
+structure_relations = [
+  {
+    'from': 'block1',
+    'to': 'block0',
+    'center_distance': {'x': 0.0, 'y': 0.0, 'z': block_length}
+  }
+]    # block1 as the base block
+
+### Example 4
+input_structure = 'vertically stacked square'
+detected_blocks = [
+  {"block_id": "block0", "color": "green", "size": "0.04"},
+  {"block_id": "block1", "color": "purple", "size": "0.04"},
+  {"block_id": "block2", "color": "orange", "size": "0.04"},
+  {"block_id": "block3", "color": "red", "size": "0.04"}
+]
+structure_relations = [
+  {
+    'from': 'block3',
+    'to': 'block0',
+    'center_distance': {'x': block_length, 'y': 0.0, 'z': block_length}
+  },
+  {
+    'from': 'block3',
+    'to': 'block2',
+    'center_distance': {'x': block_length, 'y': 0.0, 'z': 0.0}
+  },
+  {
+    'from': 'block3',
+    'to': 'block1',
+    'center_distance': {'x': 0.0, 'y': 0.0, 'z': block_length}
+  }
+]    # block3 as the base block
