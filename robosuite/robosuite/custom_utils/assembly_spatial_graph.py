@@ -71,40 +71,6 @@ class AssemblySpatialGraph:
                 print(e)
         
         return spatial_graph
-    '''
-    def _topological_sort(self, spatial_graph):
-        """
-        Get the assembly order (topological sort)
-        """
-        visited = set()
-        order = []
-
-        def dfs(block):
-            if block in visited:
-                return
-                
-            # Get all relationships for the current block
-            relationships = spatial_graph.get(block, [])
-            
-            for relationship in relationships:
-                direction = relationship[0]
-                ref_blocks = relationship[1:]
-                for ref_block in ref_blocks:
-                    if ref_block != "none":  # only follow support relationships
-                        dfs(ref_block)
-                        
-            visited.add(block)
-            order.append(block)
-            
-        # Keep the blocks in the same order they appeared
-        all_blocks = list(spatial_graph.keys())
-        
-        # DFS to get the order
-        for block in all_blocks:
-            dfs(block)
-
-        return order  # No reversal needed
-    '''
         
     def _topological_sort(self, spatial_graph):
         """

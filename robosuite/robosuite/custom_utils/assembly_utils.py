@@ -66,7 +66,7 @@ def read_file(file_path):
     ext = file_path.split(os.pathsep)[-1].split('.')[-1]
     if ext == "json":
         with open(file_path, 'r', encoding='utf-8') as f:
-            return json.loads(os.path.expandvars(f.read()))
+            return json.load(f)
     else:
         with open(file_path, 'r') as f:
             contents = f.read().strip()

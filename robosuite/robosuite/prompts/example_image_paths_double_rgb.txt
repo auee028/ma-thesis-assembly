@@ -1,0 +1,4 @@
+/home/juhee/thesis/robosuite/robosuite/demos/output_demo_passive_viewer/captured_images_20250513-182800_ex_rg/agentview_frame_0_rgb.png
+/home/juhee/thesis/robosuite/robosuite/demos/output_demo_passive_viewer/captured_images_20250513-182940_ex_rgb/agentview_frame_0_rgb.png
+/home/juhee/thesis/robosuite/robosuite/demos/output_demo_passive_viewer/captured_images_20250513-182940_ex_rgb/agentview_frame_0_rgb.png
+/home/juhee/thesis/robosuite/robosuite/demos/output_demo_passive_viewer/captured_images_20250513-182940_ex_rgb/agentview_frame_0_rgb.png

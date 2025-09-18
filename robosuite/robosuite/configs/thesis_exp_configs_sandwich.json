@@ -1,7 +1,6 @@
 {
     "task": {
         "target_query_structure": "sandwich",
-        "target_dir_tmp": "",
         "target_rgb_path": "../../../data/chatgpt_sandwich_ingredients.png"
     },
     "llm": {
@@ -10,34 +9,26 @@
             "mistral": "",
             "google": ""
         },
-        "use_llamaindex": false,
         "model_config": {
             "provider": "openai",
             "model": "gpt-4o-2024-08-06",
             "top_p": 0.8
         },
-        "token_log_dir": "../../../logs"
+        "token_log_dir": "../../../voxposer/logs"
     },
-    "which_img": "rgb",
     "relation": {
-        "use_primitives": true,
+        "dist_mode": false,
         "prim_prompt_files": {
             "system_prompt": "../prompts/system_prompt_sandwich.txt",
-            "examples_prompt": "../prompts/examples_prompt_sandwich.txt"
+            "examples_prompt": "../prompts/examples_prompt_sandwich.txt",
+            "example_rgb_paths": "../prompts/example_image_paths_rgb.txt"
         },
         "dist_prompt_files": {
             "examples_prompt": "../prompts/examples_prompt_dist.txt",
             "example_rgb_paths": "../prompts/example_image_paths_rgb.txt"
-        },
-        "example_images": {
-            "example_rgb_paths": "../prompts/example_image_paths_rgb.txt",
-            "example_depth_paths": "../prompts/example_image_paths_depth.txt",
-            "example_mask_paths": "../prompts/example_image_paths_mask.txt",
-            "example_rgbd_paths": "../prompts/example_image_paths_rgbd.txt",
-            "example_rgbseg_paths": "../prompts/example_image_paths_rgbseg.txt"
         }
     },
-    "num_iter": 1,
+    "num_iter": 10,
     "exp_id": "exp3-sandwich",
     "save_root": "./output_demo_passive_viewer"
 }

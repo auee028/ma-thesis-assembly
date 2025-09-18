@@ -1,176 +1,51 @@
-# Master Thesis "Robotic Assembly of Structures with Unknown Objects Using Large Language Models"
+# robosuite
 
+![gallery of_environments](docs/images/gallery.png)
 
-Implementations on experiments for master thesis.
+[**[Homepage]**](https://robosuite.ai/) &ensp; [**[White Paper]**](https://arxiv.org/abs/2009.12293) &ensp; [**[Documentations]**](https://robosuite.ai/docs/overview.html) &ensp; [**[ARISE Initiative]**](https://github.com/ARISE-Initiative)
 
+-------
+## Latest Updates
 
-## Requirements
+- [10/28/2024] **v1.5**: Added support for diverse robot embodiments (including humanoids), custom robot composition, composite controllers (including whole body controllers), more teleoperation devices, photo-realistic rendering. [[release notes]](https://github.com/ARISE-Initiative/robosuite/releases/tag/v1.5.0) [[documentation]](http://robosuite.ai/docs/overview.html)
 
-* Python 3.10 (also tested with 3.9)
-* robosuite 1.5.1 (RoboticManipulation branch)
-* openai 1.51.2
+- [11/15/2022] **v1.4**: Backend migration to DeepMind's official [MuJoCo Python binding](https://github.com/deepmind/mujoco), robot textures, and bug fixes :robot: [[release notes]](https://github.com/ARISE-Initiative/robosuite/releases/tag/v1.4.0) [[documentation]](http://robosuite.ai/docs/v1.4/)
 
+- [10/19/2021] **v1.3**: Ray tracing and physically based rendering tools :sparkles: and access to additional vision modalities 🎥 [[video spotlight]](https://www.youtube.com/watch?v=2xesly6JrQ8) [[release notes]](https://github.com/ARISE-Initiative/robosuite/releases/tag/v1.3) [[documentation]](http://robosuite.ai/docs/v1.3/)
 
-## Setup
+- [02/17/2021] **v1.2**: Added observable sensor models :eyes: and dynamics randomization :game_die: [[release notes]](https://github.com/ARISE-Initiative/robosuite/releases/tag/v1.2)
 
-This project is based on the [robosuite v1.5 with the passive viewer - RoboticManipulation/robosuite/tree/juhui branch](https://github.com/RoboticManipulation/robosuite/tree/juhui).
+- [12/17/2020] **v1.1**: Refactored infrastructure and standardized model classes for much easier environment prototyping :wrench: [[release notes]](https://github.com/ARISE-Initiative/robosuite/releases/tag/v1.1)
 
-Clone the repository and set up the environment:
+-------
 
-```bash
-# Clone this repository
-git clone https://gitlab.igg.uni-bonn.de/hrl_students/juhui_park/thesis-experiments.git
-cd thesis-experiments
+**robosuite** is a simulation framework powered by the [MuJoCo](http://mujoco.org/) physics engine for robot learning. It also offers a suite of benchmark environments for reproducible research. The current release (v1.5) features support for diverse robot embodiments (including humanoids), custom robot composition, composite controllers (including whole body controllers), more teleoperation devices, photo-realistic rendering. This project is part of the broader [Advancing Robot Intelligence through Simulated Environments (ARISE) Initiative](https://github.com/ARISE-Initiative), with the aim of lowering the barriers of entry for cutting-edge research at the intersection of AI and Robotics.
 
-# Create and activate conda environment
-conda create -n robosuite python=3.10
-conda activate robosuite
+Data-driven algorithms, such as reinforcement learning and imitation learning, provide a powerful and generic tool in robotics. These learning paradigms, fueled by new advances in deep learning, have achieved some exciting successes in a variety of robot control problems. However, the challenges of reproducibility and the limited accessibility of robot hardware (especially during a pandemic) have impaired research progress. The overarching goal of **robosuite** is to provide researchers with:
 
-# Install dependencies (see RoboticManipulation/robosuite/tree/juhui branch)
-cd robosuite
-pip install -e .
-pip install -r requirements-extra.txt
+* a standardized set of benchmarking tasks for rigorous evaluation and algorithm development;
+* a modular design that offers great flexibility in designing new robot simulation environments;
+* a high-quality implementation of robot controllers and off-the-shelf learning algorithms to lower the barriers to entry.
 
-# Install additional packages
-pip install matplotlib \
-            "llama-index==0.12.33" \
-            llama-index-llms-mistralai \
-            llama-index-llms-google-genai
+This framework was originally developed in late 2017 by researchers in [Stanford Vision and Learning Lab](http://svl.stanford.edu) (SVL) as an internal tool for robot learning research. Now, it is actively maintained and used for robotics research projects in SVL, the [UT Robot Perception and Learning Lab](http://rpl.cs.utexas.edu) (RPL) and NVIDIA [Generalist Embodied Agent Research Group](https://research.nvidia.com/labs/gear/) (GEAR). We welcome community contributions to this project. For details, please check out our [contributing guidelines](CONTRIBUTING.md).
 
-cd robosuite
-```
+**Robosuite** offers a modular design of APIs for building new environments, robot embodiments, and robot controllers with procedural generation. We highlight these primary features below:
 
-If you encounter the error `Install Error: Cannot initialize a EGL device display.`, try:
+* **standardized tasks**: a set of standardized manipulation tasks of large diversity and varying complexity and RL benchmarking results for reproducible research;
+* **procedural generation**: modular APIs for programmatically creating new environments and new tasks as combinations of robot models, arenas, and parameterized 3D objects. Check out our repo [robosuite_models](https://github.com/ARISE-Initiative/robosuite_models) for extra robot models tailored to robosuite.
+* **robot controllers**: a selection of controller types to command the robots, such as joint-space velocity control, inverse kinematics control, operational space control, and whole body control;
+* **teleoperation devices**: a selection of teleoperation devices including keyboard, spacemouse and MuJoCo viewer drag-drop;
+* **multi-modal sensors**: heterogeneous types of sensory signals, including low-level physical states, RGB cameras, depth maps, and proprioception;
+* **human demonstrations**: utilities for collecting human demonstrations, replaying demonstration datasets, and leveraging demonstration data for learning. Check out our sister project [robomimic](https://arise-initiative.github.io/robomimic-web/);
+* **photorealistic rendering**: integration with advanced graphics tools that provide real-time photorealistic renderings of simulated scenes, including support for NVIDIA Isaac Sim rendering.
 
-```bash
-cd robosuite
-
-# Fix for missing EGL / OpenGL support
-# Reference: https://github.com/ARISE-Initiative/robosuite/issues/490#issuecomment-2169117010
-conda install -c conda-forge gcc
-
-pip install -e .
-pip install -r requirements-extra.txt
-```
-
-
-## Test
-
-### 1. Whole assembly framework from perception to execution
-
-Set configurations by editing `configs/assembly_configs_integrated_move.json`. The main parameters to modify are:
-```
-{
-    "env": {
-        "env_name": str,    // task environment to test
-        ...
-    },
-    "task": {
-        "target_query_structure": str,    // query string to LLM
-        ...
-    },
-    "llm": {
-        "api_keys": {
-            "openai": str,    // your own API key for LLMs
-            ...
-        },
-        "use_llamaindex": false,    // whether to use LlamaIndex instead of OpenAI (false as default)
-        ...
-    },
-    "which_img": str,    // image modality (see options below)
-    "relation": {
-        "use_primitives": bool,    // whether to use spatial relation primitives instead of center distance (true as default)
-        ...
-    }
+## Citation
+Please cite [**robosuite**](https://robosuite.ai) if you use this framework in your publications:
+```bibtex
+@inproceedings{robosuite2020,
+  title={robosuite: A Modular Simulation Framework and Benchmark for Robot Learning},
+  author={Yuke Zhu and Josiah Wong and Ajay Mandlekar and Roberto Mart\'{i}n-Mart\'{i}n and Abhishek Joshi and Soroush Nasiriany and Yifeng Zhu and Kevin Lin},
+  booktitle={arXiv preprint arXiv:2009.12293},
+  year={2020}
 }
-```
-
-For `env_name`, assembly tasks are implemented under `robosuite/environments/manipulation`. The available environments are categorized into demonstration tasks (for learning examples) and target tasks (for evaluation):
-* Demonstration tasks:
-
-| env_name | task | file |
-|----------|------|------|
-| Pyramid | Pyramid | `pyramid.py` |
-| SmallTower | Small Tower | `small_tower.py` |
-| Tower | Tower | `tower.py` |
-| Square | Square | `square.py` |
-
-* Target tasks:
-
-| env_name | task | file |
-|----------|------|------|
-| BigPyramid | Big Pyramid | `big_pyramid.py` |
-| BigTower | Big Tower | `big_tower.py` |
-| TwinTowers | Towers (color) | `twin_towers.py` |
-| House | House, House (tall) | `house.py` |
-| BigHouse | Big House | `big_house.py` |
-| BigHousePillars | Big House (color+horiz.), Big House (color+verti.) | `big_house_pillars.py` |
-
-
-For `which_img`, specifying the image channels used for multimodal ICL, you can choose from the following options:
-* `unpaired`: no image in demonstrations (only for center-distance relationships)
-* `rgb`: RGB image only
-* `rgb_d`: RGB and depth images separately
-* `rgb_m`: RGB and mask images separately
-* `rgb_d_m`: RGB, depth, and mask images separately
-* `fused_rgbd`: fused 4-channel RGB-D
-* `fused_rgbm`: RGB segmentation of building objects
-
-
-For `llm/use_llamaindex`, you can choose which LLM API framework to use:
-* `false` (default): import `StructurePlanner` from `structure_planner.py` (OpenAI)
-* `true`: import `AssemblyLLM` from `structure_planner.py` (LlamaIndex)
-
-
-> You can provide your API key in two ways:
-> 
-> 1. Save it in the JSON config file (e.g., `configs/assembly_configs_integrated_move.json`)
-> 2. Set it as a system environment variable.
-> 
-> If you choose the environment variable option, use one of the following methods:
-> ```bash
-> # For the current terminal session only
-> export OPENAI_API_KEY=your_api_key_here
-> ```
-> ```bash
-> # For permanent use (bash users)
-> echo 'export OPENAI_API_KEY=your_api_key_here' >> ~/.bashrc
-> source ~/.bashrc
-> ```
-
-
-Run the following to test the framework in simulation:
-
-```bash
-export XDG_SESSION_TYPE=x11
-
-cd demos
-python demo_passive_viewer_integrated_move.py 
-```
-
-
-### 2. Sandwich task for evaluating generalization
-
-Set configurations by editing `configs/assembly_configs_sandwich.json`:
-```
-{
-    "task": {
-        "target_query_structure": str,    // query string to LLM, e.g., "sandwich", "vegetarian sandwich", and "sandwich for milk allergy"
-        ...
-    },
-    "llm": {
-        "api_keys": {
-            "openai": str,    // your own API key for LLMs
-            ...
-        },
-        "use_llamaindex": false,    // whether to use LlamaIndex instead of OpenAI (false as default)
-    }
-}
-```
-
-Run the following to test the Sandwich task:
-
-```bash
-cd demos
-python plan_sandwich_assembly.py 
 ```

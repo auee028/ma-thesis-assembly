@@ -1,0 +1,3 @@
+/home/juhee/thesis/robosuite/robosuite/demos/output_demo_passive_viewer/captured_images_20250507-155702_ex1/agentview_frame_0_rgb.png
+/home/juhee/thesis/robosuite/robosuite/demos/output_demo_passive_viewer/captured_images_20250507-155752_ex2/agentview_frame_0_rgb.png
+/home/juhee/thesis/robosuite/robosuite/demos/output_demo_passive_viewer/captured_images_20250507-160214_ex3/agentview_frame_0_rgb.png

@@ -1,0 +1,65 @@
+### Example 1
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_1}}"
+Query: "tower"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "green", "block_length": 0.04"},
+    {"id": "block1", "color": "yellow", "block_length": 0.04"},
+    {"id": "block2", "color": "orange", "block_length": 0.04"}
+  ],
+  "structure_relations": [
+    {
+      "from": "block2",    # block2 as the base block
+      "to": "block0",
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}}
+    },
+    {
+      "from": "block1",
+      "to": "block0",
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}}
+    }
+  ]
+}
+
+### Example 2
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_2}}"
+Query: "pyramid"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "yellow", "block_length": 0.04"},
+    {"id": "block1", "color": "orange", "block_length": 0.04"},
+    {"id": "block2", "color": "purple", "block_length": 0.04"}
+  ],
+  "structure_relations": [
+    {
+      "from": "block1",    # block1 as the base block
+      "to": "block0",
+      "center_distance": {'x': -block_length, 'y': 0.0, 'z': 0.0}}
+    },
+    {
+      "from": "block1",
+      "to": "block2",
+      "center_distance": {'x': -block_length/2, 'y': 0.0, 'z': block_length}}
+    }
+  ]
+}
+
+### Example 3
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_3}}"
+Query: "tower"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "red", "block_length": 0.04"},
+    {"id": "block1", "color": "blue", "block_length": 0.04"}
+  ],
+  "structure_relations": [
+    {
+      "from": "block0",    # block0 as the base block
+      "to": "block1",
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}}
+    }
+  ]
+}

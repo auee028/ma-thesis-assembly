@@ -1,0 +1,48 @@
+### Example 1
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_1}}"
+Query: "tower"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "green"},
+    {"id": "block1", "color": "yellow"},
+    {"id": "block2", "color": "orange"}
+  ],
+  "assembly_structure": [
+    "block2 is at the bottom.",
+    "block0 is on top of block2.",
+    "block1 is on top of block0."
+  ]  
+}
+
+### Example 2
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_2}}"
+Query: "pyramid"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "yellow"},
+    {"id": "block1", "color": "orange"},
+    {"id": "block2", "color": "purple"}
+  ],
+  "assembly_structure": [
+    "block1 is on the table.",
+    "block0 is left of block1.",
+    "block2 is above block1 and block0."
+  ]  
+}
+
+### Example 3
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_3}}"
+Query: "tower"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "red"},
+    {"id": "block1", "color": "blue"}
+  ],
+  "assembly_structure": [
+    "block0 is at the base.",
+    "block1 is directly supported by block0."
+  ]  
+}

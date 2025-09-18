@@ -1,0 +1,21 @@
+import datetime
+
+def get_clock_time(milliseconds=False):
+    curr_time = datetime.datetime.now()
+    if milliseconds:
+        return f'{curr_time.hour}:{curr_time.minute}:{curr_time.second}.{curr_time.microsecond // 1000}'
+    else:
+        return f'{curr_time.hour}:{curr_time.minute}:{curr_time.second}'
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    RED = "\033[31m"
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    RESET = "\033[0m"  # Resets the color

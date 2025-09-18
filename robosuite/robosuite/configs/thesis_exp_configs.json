@@ -1,0 +1,60 @@
+{
+    "env": {
+        "env_name": "",
+        "robots": "UR5e",
+        "has_renderer": false,
+        "has_offscreen_renderer": true,
+        "use_camera_obs": true,
+        "camera_heights": 256,
+        "camera_widths": 256,
+        "camera_names": ["frontview", "birdview", "agentview", "sideview"],
+        "camera_depths": ["frontview", "birdview", "agentview", "sideview"],
+        "camera_segmentations": "element",
+        "hard_reset": false,
+        "mujoco_passive_viewer": false,
+        "horizon": 5000
+    },
+    "task": {
+        "target_query_structure": "vegetarian sandwich",
+        "target_cam": "agentview",
+        "target_rgb_dir": "../tmp",
+        "target_rgb_path": "../../../data/chatgpt_sandwich_ingredients.png",
+        "target_depth_path": "",
+        "target_seg_path": ""
+    },
+    "llm": {
+        "api_keys": {
+            "openai": "",
+            "mistral": "",
+            "google": ""
+        },
+        "model_config": {
+            "provider": "openai",
+            "model": "gpt-4o-2024-08-06",
+            "top_p": 0.8
+        },
+        "token_log_dir": "../../../voxposer/logs"
+    },
+    "relation": {
+        "dist_mode": false,
+        "prim_prompt_files": {
+            "system_prompt": "../prompts/system_prompt_sandwich.txt",
+            "examples_prompt": "../prompts/examples_prompt_sandwich.txt",
+            "example_rgb_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_depth_paths": "",
+            "example_seg_paths": ""
+        },
+        "dist_prompt_files": {
+            "examples_prompt": "../prompts/examples_prompt_dist.txt",
+            "example_rgb_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_depth_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_seg_paths": "../prompts/example_image_paths_seg.txt"
+        }
+    },
+    "controller": {
+        "config_fpath": "../custom_utils/whole_body_ik_assembly.json"
+    },
+    "num_iter": 10,
+    "exp_id": "sandwich-new-prompt",
+    "save_root": "./output_demo_passive_viewer"
+}

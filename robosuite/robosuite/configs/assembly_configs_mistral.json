@@ -1,0 +1,45 @@
+{
+    "env": {
+        "env_name": "BigHouse",
+        "robots": "UR5e",
+        "has_renderer": false,
+        "has_offscreen_renderer": true,
+        "use_camera_obs": true,
+        "camera_heights": 256,
+        "camera_widths": 256,
+        "camera_names": ["frontview", "birdview", "agentview", "sideview"],
+        "camera_depths": ["frontview", "birdview", "agentview", "sideview"],
+        "camera_segmentations": "element",
+        "hard_reset": false,
+        "mujoco_passive_viewer": true,
+        "horizon": 5000
+    },
+    "task": {
+        "target_query_structure": "house with uni-colored pillars",
+        "target_rgb_path": "../tmp/obs_rgb_init.png",
+        "target_rgb_dir": "../tmp",
+        "target_cam": "agentview"
+    },
+    "llm": {
+        "api_keys": {
+            "openai": "",
+            "mistral": "",
+            "google": ""
+        },
+        "model_config": {
+            "provider": "mistral",
+            "model": "",
+            "top_p": 0.2
+        },
+        "prompt_txt_files": {
+            "system_prompt": "../prompts/system_prompt.txt",
+            "examples_prompt": "../prompts/examples_prompt.txt",
+            "example_image_paths": "../prompts/example_image_paths.txt"
+        },
+        "token_log_dir": "../../../voxposer/logs"
+    },
+    "controller": {
+        "config_fpath": "../custom_utils/whole_body_ik_assembly.json"
+    },
+    "save_root": "./output_demo_passive_viewer"
+}

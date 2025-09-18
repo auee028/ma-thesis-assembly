@@ -1,6 +1,5 @@
 import numpy as np
-# from robosuite.custom_utils.assembly_utils import *
-from robosuite.custom_utils.assembly_utils import match_block_names
+
 from robosuite.custom_utils.assembly_spatial_graph import AssemblySpatialGraph
 from robosuite.custom_utils.voxposer_utils import get_clock_time, bcolors
 
@@ -23,9 +22,6 @@ class ActionPlanner:
         if self.use_prim is False:    # When applying center distances instead of spatial relation primitives
             assembly_structure = blueprint["structure_relations"]
             assembly_order, new_block_positions = self._compute_positions_from_distances(assembly_structure)
-            # print("* * *")
-            # print("Assembly order: ", assembly_order)
-            # print("New block positions: ", new_block_positions)
 
         else:    # When applying spatial relation primitives
             assembly_structure = blueprint["assembly_structure"]
@@ -33,12 +29,9 @@ class ActionPlanner:
             # Get assembly order
             g = AssemblySpatialGraph()
             spatial_dag, assembly_order = g(assembly_structure)
-            # print("Assembly order: ", assembly_order)
 
             # Calculate 3d coordinates of individual blocks and log them
             new_block_positions = self._compute_positions_from_instructions(spatial_dag, assembly_order)
-            # print("* * *")
-            # print("New block positions: ", new_block_positions)
 
         print("Assembly order: ", assembly_order)
         print("New block positions: ", new_block_positions)
@@ -56,11 +49,9 @@ class ActionPlanner:
             relative_dist = np.array([center_distance["x"], center_distance["y"], center_distance["z"]])
             
             if src_block not in block_positions.keys():
-                # block_positions[src_block] = np.array([0., 0., 0.])
                 if len(base_blocks) == 0:
                     new_pos = self.base_pos
                 else:
-                    # new_pos = base_blocks[-1][1] + np.array([block_size[0], 0.0, 0.0])
                     new_pos = base_blocks[-1][1] - np.array([self.block_size[0] * 1.5, 0.0, 0.0])
                 base_blocks.append(tuple([src_block, new_pos]))
                 block_positions[src_block] = new_pos
@@ -76,13 +67,6 @@ class ActionPlanner:
         """
         compute the 3d position of each block depending on its supporter
         """
-        # block_size = np.array([0.04, 0.04, 0.04])  # assuming cubic block
-        # # block_size = 0.04  # assuming uniform block length
-        
-        # table_center = self.table_center
-        # goal_area_offset = np.array([0, 0.28, 0.025])    # looking from sideview
-        # base_pos = table_center + goal_area_offset
-        
         block_positions = {}
         base_blocks = []
         

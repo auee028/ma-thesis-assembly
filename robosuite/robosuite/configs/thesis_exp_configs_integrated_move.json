@@ -1,6 +1,6 @@
 {
     "env": {
-        "env_name": "BigPyramid",
+        "env_name": "BigHousePillars",
         "robots": "UR5e",
         "has_renderer": false,
         "has_offscreen_renderer": true,
@@ -31,25 +31,26 @@
             "mistral": "",
             "google": ""
         },
-        "use_llamaindex": false,
         "model_config": {
             "provider": "openai",
             "model": "gpt-4o-2024-08-06",
             "top_p": 0.2
         },
-        "token_log_dir": "../../../logs"
+        "token_log_dir": "../../../voxposer/logs"
     },
-    "which_img": "rgb_m",
     "relation": {
-        "use_primitives": false,
+        "dist_mode": false,
         "prim_prompt_files": {
             "system_prompt": "../prompts/system_prompt_relation_primitives.txt",
-            "examples_prompt": "../prompts/examples_prompt.txt"
+            "examples_prompt": "../prompts/examples_prompt.txt",
+            "example_rgb_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_depth_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_mask_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_rgbd_paths": "../prompts/example_image_paths_rgb.txt",
+            "example_rgbseg_paths": "../prompts/example_image_paths_rgb.txt"
         },
         "dist_prompt_files": {
-            "examples_prompt": "../prompts/examples_prompt_dist.txt"
-        },
-        "example_images": {
+            "examples_prompt": "../prompts/examples_prompt_dist.txt",
             "example_rgb_paths": "../prompts/example_image_paths_rgb.txt",
             "example_depth_paths": "../prompts/example_image_paths_depth.txt",
             "example_mask_paths": "../prompts/example_image_paths_mask.txt",
