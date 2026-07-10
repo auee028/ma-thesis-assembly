@@ -1,0 +1,4 @@
+date_time	model	input_tokens(input_costs)	output_tokens(output_costs)	total_tokens(total_costs)	accumulated_cost[dolar]
+2026-07-07_17-38-20	gemini-2.5-flash	710(0.0)	258(0.0)	3386(0.0)	0.0
+2026-07-07_17-42-08	gemini-2.5-flash	665(0.0)	206(0.0)	1359(0.0)	0.0
+2026-07-07_17-47-21	gemini-2.5-flash	665(0.0)	212(0.0)	2066(0.0)	0.0

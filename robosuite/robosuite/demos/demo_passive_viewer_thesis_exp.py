@@ -57,7 +57,7 @@ os.makedirs(configs["task"]["target_rgb_dir"], exist_ok=True)
 save_dir = os.path.join(configs["save_root"], f'captured_images_{datetime.today().strftime("%Y%m%d-%H%M%S")}_thesis_{configs["exp_id"]}_{env_config["env_name"]}')
 if not configs["llm"]["model_config"]["top_p"]:    # if setting of top_p is null
     save_dir += "_topp1"    # top_p=1.0 as default
-os.mkdir(save_dir)
+os.makedirs(save_dir, exist_ok=True)
 
 # Create a directory to save input rgb and visualization
 os.mkdir(os.path.join(save_dir, "assembly_vis"))
@@ -66,10 +66,10 @@ os.mkdir(os.path.join(save_dir, "assembly_input_img"))
 # Save the current files
 os.system(f"cp {config_path} {os.path.join(save_dir, os.path.basename(config_path))}")
 
-system_prompt = configs["llm"]["prompt_files"]["system_prompt"]
+system_prompt = configs["relation"]["prim_prompt_files"]["system_prompt"]
 os.system(f"cp {system_prompt} {os.path.join(save_dir, os.path.basename(system_prompt))}")
 
-examples_prompt = configs["llm"]["prompt_files"]["examples_prompt"]
+examples_prompt = configs["relation"]["prim_prompt_files"]["examples_prompt"]
 os.system(f"cp {examples_prompt} {os.path.join(save_dir, os.path.basename(examples_prompt))}")
 
 # Reset the environment
@@ -188,7 +188,6 @@ for i in range(configs["num_iter"]):
     # Reset the environment
     env.reset()
 
-"""
 # Plan and execute
 planner = AssemblyPlanner(env, block_matches)
 planner(spatial_graph, assembly_order)
@@ -206,7 +205,6 @@ for cam_name in camera_names:
         rgb_img = obs[rgb_cam_name]  # Get image from the observation
         save_path = os.path.join(save_dir, f"after_assembling_{cam_name}_frame.png")
         save_cam_image(rgb_img, save_path)
-"""
 
 env.close()
 

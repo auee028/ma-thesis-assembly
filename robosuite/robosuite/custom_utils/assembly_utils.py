@@ -45,6 +45,7 @@ MODEL_COSTS = {
     'mistral-small-latest': [0, 0],  # free model from mistral
     'pixtral-12b-2409': [0, 0],  # free model from mistral
     'gemini-2.0-flash': [0, 0],  # free model from google
+    'gemini-2.5-flash': [0, 0],  # free model from google
 }
 
 

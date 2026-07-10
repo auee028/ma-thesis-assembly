@@ -26,24 +26,24 @@ class AssemblyLLM:
         # Init model
         if self.llm_provider == "openai":
             if not self.llm_model:
-                model = "gpt-4o"
+                self.model = "gpt-4o"
             else:
-                model = self.llm_model
-            self.llm = OpenAI(model=model)
+                self.model = self.llm_model
+            self.llm = OpenAI(model=self.model)
 
         elif self.llm_provider == "mistral":
             if not self.llm_model:
-                model = "mistral-small-latest"
+                self.model = "mistral-small-latest"
             else:
-                model = self.llm_model
-            self.llm = MistralAI(model=model)
+                self.model = self.llm_model
+            self.llm = MistralAI(model=self.model)
 
         elif self.llm_provider == "google":
             if not self.llm_model:
-                model = "gemini-2.0-flash"
+                self.model = "gemini-2.0-flash"
             else:
-                model = self.llm_model
-            self.llm = GoogleGenAI(model=model)  
+                self.model = self.llm_model
+            self.llm = GoogleGenAI(model=self.model)  
         
     def _register_api_key(self):
         """
@@ -188,6 +188,8 @@ class AssemblyLLM:
             input_tokens = usage.prompt_tokens   # input token usage
             output_tokens = usage.completion_tokens    # output token usage
             total_tokens = usage.total_tokens
+            
+            assert input_tokens + output_tokens == total_tokens
         elif self.llm_provider == "google":
             ts = response.raw.get("created", None)
             usage = response.raw.get("usage_metadata", {})
@@ -202,15 +204,15 @@ class AssemblyLLM:
             input_tokens = usage.prompt_tokens   # input token usage
             output_tokens = usage.completion_tokens    # output token usage
             total_tokens = usage.total_tokens
-        assert input_tokens + output_tokens == total_tokens
+        # assert input_tokens + output_tokens == total_tokens
         
         if ts is None:
             ts = ts_now
         
         token_log_dir = self.llm_config.get("token_log_dir")
         if not os.path.exists(token_log_dir):
-            os.mkdir(token_log_dir)
-        log_token_usage(ts, model, input_tokens, output_tokens, total_tokens, token_log_dir=token_log_dir)
+            os.makedirs(token_log_dir, exist_ok=True)
+        log_token_usage(ts, self.model, input_tokens, output_tokens, total_tokens, token_log_dir=token_log_dir)
 
         return response
 

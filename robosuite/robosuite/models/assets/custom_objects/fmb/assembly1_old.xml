@@ -1,0 +1,25 @@
+<mujoco model="fmb_board1">
+    <asset>
+        <mesh name="board1_mesh" file="meshes/board1.obj" scale="0.001 0.001 0.001"/>
+    </asset>
+    <worldbody>
+        <body>
+            <body name="object">
+                <!-- visual -->
+                <geom mesh="board1_mesh" type="mesh" contype="0" conaffinity="0" group="1"/>
+                    
+                <!-- collision -->
+                <geom mesh="board1_mesh" type="mesh" group="0" density="500" friction="1 0.005 0.0001"/>
+            </body>
+                
+            <!-- Bottom site (centered at base) -->
+            <site rgba="0 0 0 0" size="0.005" pos="0 0 -0.025" name="bottom_site"/>
+                
+            <!-- Top site (apex point) -->
+            <site rgba="0 0 0 0" size="0.005" pos="0 0 0.025" name="top_site"/>
+                
+            <!-- Center of mass site -->
+            <site rgba="0 0 0 0" size="0.005" pos="0 0 0" name="horizontal_radius_site"/>
+        </body>
+    </worldbody>
+</mujoco>

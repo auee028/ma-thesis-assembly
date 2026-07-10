@@ -1,0 +1,32 @@
+20260707-18:47:21```json
+{
+  "detected_blocks": [
+    {
+      "block_id": "block0",
+      "color": "green"
+    },
+    {
+      "block_id": "block1",
+      "color": "blue"
+    },
+    {
+      "block_id": "block2",
+      "color": "purple"
+    },
+    {
+      "block_id": "block3",
+      "color": "yellow"
+    },
+    {
+      "block_id": "block4",
+      "color": "orange"
+    }
+  ],
+  "assembly_structure": [
+    "Place block0 (green) at the base on the table.",
+    "Place block3 (yellow) at the base on the table, to the right of block0.",
+    "Place block2 (purple) on top of block0 and block3."
+  ]
+}
+```
+

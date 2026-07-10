@@ -506,3 +506,66 @@ class CustomMoonObject(MujocoXMLObject):
             geom_visual.set("rgba", " ".join(map(str, self.rgba)))
         
         return tree
+
+class FMBObject(MujocoXMLObject):
+    """
+    An object extracted from the corresponding assembly XML.
+    """
+
+    def __init__(self, name, fmb_xml_file):
+        self.obj_id = name.split("obj")[-1]
+        
+        super().__init__(
+            xml_path_completion(fmb_xml_file),
+            name=name,
+            joints=[dict(type="free", damping="0.001")],
+            obj_type="all",
+            duplicate_collision_geoms=True,
+        )
+
+    def _get_object_subtree(self):
+        tree = super()._get_object_subtree()
+
+        #     visual_rgba = None
+
+        #     # Find original visual color
+        #     for geom in tree.findall(".//geom"):
+        #         if geom.get("material"):
+        #             mat = self.asset.find(f"material[@name='{geom.get('material')}']")
+        #             if mat is not None:
+        #                 visual_rgba = mat.get("rgba")
+
+        #     # Apply to generated visual geoms
+        #     if visual_rgba:
+        #         for geom in tree.findall(".//geom"):
+        #             if geom.get("name").endswith("_visual"):
+        #                 geom.set("rgba", visual_rgba)
+
+        # return tree
+
+        # Ensure geom uses the updated material
+        visual_rgba = None
+
+        for geom in tree.findall(".//geom"):
+            if geom.get("group") == "1":  # visual group, not collision
+                material_name = geom.get("material")
+
+                if material_name:
+                    mat = self.asset.find(f"material[@name='{material_name}']")
+
+                    if mat is not None:
+                        rgba = mat.get("rgba")
+
+                        if rgba:
+                            geom.set("rgba", rgba)
+
+                            # Save color for duplicated visual geom
+                            visual_rgba = rgba
+
+
+        # Ensure duplicated visual geom uses the same color
+        if visual_rgba is not None:
+            for geom in tree.findall(".//geom"):
+                if geom.get("name") == "collision_visual":
+                    geom.set("rgba", visual_rgba)
+        return tree

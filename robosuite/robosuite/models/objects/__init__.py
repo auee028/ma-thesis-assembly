@@ -18,6 +18,7 @@ from .xml_objects import (
     PlateWithHoleObject,
     DoorObject,
     CustomTriangleObject,
+    FMBObject,
 )
 from .primitive import *
 from .composite import *
