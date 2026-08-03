@@ -10,7 +10,7 @@ from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.mjcf_utils import CustomMaterial
 from robosuite.utils.observables import Observable, sensor
 from robosuite.utils.placement_samplers import UniformRandomSampler
-from robosuite.utils.placement_samplers import SequentialCompositeSampler
+# from robosuite.utils.placement_samplers import SequentialCompositeSampler
 from robosuite.utils.transform_utils import convert_quat
 from robosuite.models.objects import FMBObject
 

@@ -61,4 +61,4 @@ if __name__ == "__main__":
         out_dir = Path(f"../models/assets/custom_objects/fmb/meshes/{data}/")
 
         for obj_file in sorted(obj_dir.glob("*.obj")):
-            recenter_obj(obj_file, out_dir / obj_file.stem)
+            recenter_obj(obj_file, out_dir / obj_file.name)
