@@ -54,15 +54,11 @@ def recenter_obj(input_path, output_path=None):
 
 if __name__ == "__main__":
 
-    name = "assembly1"
-    obj_dir = Path(f"../models/assets/custom_objects/fmb/meshes/{name}_old/") # Path(".")
-    out_dir = Path(f"../models/assets/custom_objects/fmb/meshes/{name}/")
+    # data = "assembly1"
+    l_data = ["assembly2", "assembly3", "fixture", "peg", "peg_board", "peg_fixture"]
+    for data in l_data:
+        obj_dir = Path(f"../models/assets/custom_objects/fmb/meshes/{data}_old/") # Path(".")
+        out_dir = Path(f"../models/assets/custom_objects/fmb/meshes/{data}/")
 
-    for name in [
-        "obj1.obj",
-        "obj2.obj",
-        "obj3.obj",
-        "obj4.obj",
-        "obj5.obj",
-    ]:
-        recenter_obj(obj_dir / name, out_dir / name)
+        for obj_file in sorted(obj_dir.glob("*.obj")):
+            recenter_obj(obj_file, out_dir / obj_file.stem)
