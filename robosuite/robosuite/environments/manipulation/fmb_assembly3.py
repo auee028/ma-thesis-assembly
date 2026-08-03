@@ -435,7 +435,7 @@ class Assembly3(ManipulationEnv):
         
         # +-------------------------------------------------+
         # |                                                 |
-        # |  obj2      obj3      obj4      obj5             |
+        # |  obj5      obj4      obj3      obj2             |
         # |                                                 |
         # |                                 obj1 (frame)    |
         # |                                                 |
