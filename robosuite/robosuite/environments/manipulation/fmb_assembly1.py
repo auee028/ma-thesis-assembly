@@ -10,6 +10,7 @@ from robosuite.models.tasks import ManipulationTask
 from robosuite.utils.mjcf_utils import CustomMaterial
 from robosuite.utils.observables import Observable, sensor
 from robosuite.utils.placement_samplers import UniformRandomSampler
+from robosuite.utils.placement_samplers import SequentialCompositeSampler
 from robosuite.utils.transform_utils import convert_quat
 from robosuite.models.objects import FMBObject
 
@@ -184,8 +185,8 @@ class Assembly1(ManipulationEnv):
         # whether to use ground-truth object states
         self.use_object_obs = use_object_obs
 
-        # object placement initializer
-        self.placement_initializer = placement_initializer
+        # # object placement initializer
+        # self.placement_initializer = placement_initializer
 
         super().__init__(
             robots=robots,
@@ -265,45 +266,84 @@ class Assembly1(ManipulationEnv):
 
         # initialize the objects of FMB Assembly 1
         self.obj1 = FMBObject(
-            name="obj1",
+            name="obj1",	# red (frame)
             fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj1.xml",
         )
         self.obj2 = FMBObject(
-            name="obj2",
+            name="obj2",	# purple
             fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj2.xml",
         )
         self.obj3 = FMBObject(
-            name="obj3",
+            name="obj3",	# yellow
             fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj3.xml",
         )
         self.obj4 = FMBObject(
-            name="obj4",
+            name="obj4",	# green
             fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj4.xml",
         )
         self.obj5 = FMBObject(
-            name="obj5",
+            name="obj5",	# blue
             fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj5.xml",
         )
         
         self.objects = [self.obj1, self.obj2, self.obj3, self.obj4, self.obj5]
+        
+        '''
+        # # Create placement initializer
+        # if self.placement_initializer is not None:
+        #     self.placement_initializer.reset()
+        #     self.placement_initializer.add_objects(self.objects)
+        # else:
+        #     self.placement_initializer = UniformRandomSampler(
+        #         name="ObjectSampler",
+        #         mujoco_objects=self.objects,
+        #         x_range=[-0.2, 0.2],
+        #         y_range=[-0.2, 0.2],
+        #         rotation_axis='z',
+        #         rotation=None,
+        #         ensure_object_boundary_in_range=False,
+        #         ensure_valid_placement=True,
+        #         reference_pos=self.table_offset,
+        #         z_offset=0.01,
+        #     )
+        
+        self.placement_initializer = SequentialCompositeSampler(name="ObjectSampler")
 
-        # Create placement initializer
-        if self.placement_initializer is not None:
-            self.placement_initializer.reset()
-            self.placement_initializer.add_objects(self.objects)
-        else:
-            self.placement_initializer = UniformRandomSampler(
-                name="ObjectSampler",
-                mujoco_objects=self.objects,
-                x_range=[-0.2, 0.2],
-                y_range=[-0.2, 0.2],
-                rotation_axis='z',
-                rotation=None,
-                ensure_object_boundary_in_range=False,
-                ensure_valid_placement=True,
-                reference_pos=self.table_offset,
-                z_offset=0.01,
-            )
+        # -----------------------------
+        # Frame (obj1)
+        # -----------------------------
+        frame_sampler = UniformRandomSampler(
+            name="FrameSampler",
+            mujoco_objects=[self.obj1],
+            x_range=[0.0, 0.0],
+            y_range=[0.2, 0.2],        # left side
+            rotation=None,
+            rotation_axis="z",
+            ensure_valid_placement=True,
+            ensure_object_boundary_in_range=False,
+            reference_pos=self.table_offset,
+            z_offset=0.01,
+        )
+
+        # -----------------------------
+        # Parts (obj2-obj5)
+        # -----------------------------
+        parts_sampler = UniformRandomSampler(
+            name="PartsSampler",
+            mujoco_objects=[self.obj2, self.obj3, self.obj4, self.obj5],
+            x_range=[-0.12, 0.12],
+            y_range=[-0.12, 0.12],      # right side
+            rotation=None,
+            rotation_axis="z",
+            ensure_valid_placement=True,
+            ensure_object_boundary_in_range=False,
+            reference_pos=self.table_offset,
+            z_offset=0.01,
+        )
+
+        self.placement_initializer.append_sampler(frame_sampler)
+        self.placement_initializer.append_sampler(parts_sampler)
+        '''
 
         # task includes arena, robot, and objects of interest
         self.model = ManipulationTask(
@@ -385,7 +425,7 @@ class Assembly1(ManipulationEnv):
             # obj5-related observables
             @sensor(modality=modality)
             def obj5_pos(obs_cache):
-                return np.array(self.sim.data.body_xpos[self.obj1_body_id])
+                return np.array(self.sim.data.body_xpos[self.obj5_body_id])
 
             @sensor(modality=modality)
             def obj5_quat(obs_cache):
@@ -418,7 +458,8 @@ class Assembly1(ManipulationEnv):
         Resets simulation internal configurations.
         """
         super()._reset_internal()
-
+        
+        '''
         # Reset all object positions using initializer sampler if we're not directly loading from an xml
         if not self.deterministic_reset:
 
@@ -428,6 +469,31 @@ class Assembly1(ManipulationEnv):
             # Loop through all objects and reset their positions
             for obj_pos, obj_quat, obj in object_placements.values():
                 self.sim.data.set_joint_qpos(obj.joints[0], np.concatenate([np.array(obj_pos), np.array(obj_quat)]))
+        '''
+        
+        # +-------------------------------------------------+
+        # |                                                 |
+        # |  obj2      obj3      obj4      obj5             |
+        # |                                                 |
+        # |                                 obj1 (frame)    |
+        # |                                                 |
+        # +-------------------------------------------------+
+        # 			robot
+        placements = {
+            self.obj1: [-0.2, -0.15, self.table_offset[2] + 0.02], # [-0.2, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj2: [0.12, -0.15, self.table_offset[2] + 0.045], # [0.1, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj3: [0.12, 0.0, self.table_offset[2] + 0.0135], # [0.1, -0.15, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj4: [0.12, 0.15, self.table_offset[2] + 0.045], # [0.1, 0.0, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj5: [0.12, 0.3, self.table_offset[2] + 0.045], # [0.1, 0.15, self.table_offset[2] -0.005] (before recentering .obj file)
+        }
+
+        quat = np.array([1, 0, 0, 0])   # no rotation
+
+        for obj, pos in placements.items():
+            self.sim.data.set_joint_qpos(
+                obj.joints[0],
+                np.concatenate([np.array(pos), quat])
+            )
 
     def visualize(self, vis_settings):
         """
