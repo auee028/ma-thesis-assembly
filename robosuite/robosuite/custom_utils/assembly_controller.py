@@ -3,10 +3,18 @@ import time
 from robosuite.utils.transform_utils import mat2quat, convert_quat, quat2axisangle, axisangle2quat, quat_multiply, quat_distance
 from robosuite.custom_utils.voxposer_utils import get_clock_time, bcolors
 
+FMB_TASKS = ["assembly1", "assembly2", "assembly3"]
+PICK_ROTATION_EXCEPTIONS = {
+    "assembly1": ["obj3"],
+    "assembly2": ["obj2"],
+    "assembly3": ["obj4", "obj5"],
+}
+
 
 class WholeBodyIKController:
     def __init__(self, env, default_ee_pose=None):
         self.env = env
+        self.env_name = env.__class__.__name__.lower()
         
         self.last_ee_pos = self._get_gripper_pos()
         self.last_ee_quat = self._get_gripper_quat()
@@ -182,12 +190,17 @@ class WholeBodyIKController:
                 self.last_ee_quat = convert_quat(obs['robot0_eef_quat'], to='wxyz')
             self._action_terminated = False    # initialize the flag
     
+    def _no_rotation_for_pick(self, block_name):
+        exceptions = PICK_ROTATION_EXCEPTIONS.get(self.env_name.lower(), set())
+        return block_name in exceptions
+
+    
     def move_block(self, block_name, target_pos, target_ori=None):
         """
         Complete a block movement sequence using WholeBodyIK
         
         Args:
-            block_name: block name to move
+            block_name: body name of the block to move
             target_pos: [x,y,z]
             target_ori: [w,x,y,z]
         """
@@ -219,6 +232,8 @@ class WholeBodyIKController:
         block_quat_xyzw = convert_quat(block_quat, to='xyzw')
         quat_180_x = axisangle2quat([np.pi, 0, 0])   # 180° around X-axis (flip)
         quat_90_z = axisangle2quat([0, 0, -np.pi / 2])   # -90° around Z-axis
+        quat_p90_z = axisangle2quat([0, 0, np.pi / 2])   # 90° around Z-axis
+
         grasp_quat = convert_quat(
             quat_multiply(quat_180_x, quat_multiply(quat_90_z, block_quat_xyzw)),
             to='wxyz'
@@ -227,6 +242,20 @@ class WholeBodyIKController:
             quat_multiply(quat_90_z, convert_quat(np.array(self.default_ee_quat))),
             to='wxyz'
         )
+        if self.env_name.lower() in FMB_TASKS:
+            grasp_quat = self.default_ee_quat
+            block_name_stem = block_name.replace("_main", "")
+            if self._no_rotation_for_pick(block_name_stem):
+                grasp_quat = convert_quat(
+                quat_multiply(quat_90_z, convert_quat(np.array(self.default_ee_quat))),
+                to='wxyz'
+            )
+
+            place_quat = convert_quat(
+                quat_multiply(quat_p90_z, convert_quat(self._get_eef_quat())),
+                to='wxyz'
+            )
+
         self.move_to_pose(block_pos, quaternion=grasp_quat, phase='reach', ori_thresh=1.6, num_steps=35)
         
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Closing gripper{bcolors.RESET}")

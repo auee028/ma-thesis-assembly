@@ -33,7 +33,7 @@ class ActionPlanner:
             # Calculate 3d coordinates of individual blocks and log them
             new_block_positions = self._compute_positions_from_instructions(spatial_dag, assembly_order)
 
-        print("Assembly order: ", assembly_order)
+        # print("Assembly order: ", assembly_order)
         print("New block positions: ", new_block_positions)
 
         return assembly_order, new_block_positions

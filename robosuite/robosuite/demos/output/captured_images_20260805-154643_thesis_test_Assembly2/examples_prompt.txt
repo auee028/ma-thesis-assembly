@@ -1,0 +1,67 @@
+### Example 1
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_1}}"
+Query: "tower"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "orange"},
+    {"id": "block1", "color": "yellow"},
+    {"id": "block2", "color": "green"}
+  ],
+  "assembly_structure": [
+    "block2 is at the bottom.",
+    "block0 is on top of block2.",
+    "block1 is on top of block0."
+  ]  
+}
+
+### Example 2
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_2}}"
+Query: "pyramid"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "yellow"},
+    {"id": "block1", "color": "purple"},
+    {"id": "block2", "color": "orange"}
+  ],
+  "assembly_structure": [
+    "block1 is on the table.",
+    "block0 is left of block1.",
+    "block2 is above block1 and block0."
+  ]  
+}
+
+### Example 3
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_3}}"
+Query: "tower"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "blue"},
+    {"id": "block1", "color": "red"}
+  ],
+  "assembly_structure": [
+    "block0 is at the base.",
+    "block1 is directly supported by block0."
+  ]  
+}
+
+### Example 4
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_4}}"
+Query: "vertically stacked square"
+Output:
+{
+  "detected_blocks": [
+    {"id": "block0", "color": "green"},
+    {"id": "block1", "color": "purple"},
+    {"id": "block2", "color": "orange"},
+    {"id": "block3", "color": "red"}
+  ],
+  "assembly_structure": [
+    "block2 is at the base.",
+    "block0 is right of block2.",
+    "block3 is on top of block0.",
+    "block1 is on top of block2."
+  ]  
+}

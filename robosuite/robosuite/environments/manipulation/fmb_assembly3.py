@@ -449,9 +449,11 @@ class Assembly3(ManipulationEnv):
             self.obj5: [0.12, 0.3, self.table_offset[2] + 0.045], # [0.1, 0.15, self.table_offset[2] -0.005] (before recentering .obj file)
         }
 
-        quat = np.array([1, 0, 0, 0])   # no rotation
-
-        for obj, pos in placements.items():
+        for i, (obj, pos) in enumerate(placements.items()):
+            quat = np.array([1, 0, 0, 0])   # no rotation
+            if i == 0:  # fixture
+                quat = np.array([np.sqrt(2)/2, 0.0, 0.0, np.sqrt(2)/2])   # 90 degree rotation along z axis
+                
             self.sim.data.set_joint_qpos(
                 obj.joints[0],
                 np.concatenate([np.array(pos), quat])

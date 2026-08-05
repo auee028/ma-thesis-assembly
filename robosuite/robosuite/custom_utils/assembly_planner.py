@@ -2,10 +2,13 @@ import numpy as np
 from robosuite.custom_utils.assembly_controller import WholeBodyIKController
 from robosuite.custom_utils.voxposer_utils import get_clock_time, bcolors
 
+FMB_TASKS = ["assembly1", "assembly2", "assembly3"]
+
 
 class AssemblyPlanner:
     def __init__(self, env, block_matches, default_ee_pose=None):
         self.env = env
+        self.env_name = env.__class__.__name__
         self.block_matches = block_matches
         
         self.controller = WholeBodyIKController(env, default_ee_pose=default_ee_pose)
@@ -16,6 +19,8 @@ class AssemblyPlanner:
         print("New block positions: ", new_block_positions)
         
         print(f"{bcolors.OKCYAN}[assembly_planner.py | {get_clock_time()}] Passing the action plans to the controller{bcolors.RESET}")
+        if self.env_name.lower() in FMB_TASKS:
+            assembly_order = assembly_order[1:]   # skip the first obj (fixture) for the FMB tasks
         for curr_block in assembly_order:
             print(f"{bcolors.OKCYAN}[assembly_planner.py | {get_clock_time()}] Current block: {curr_block}{bcolors.RESET}")
             body_name = self.block_matches[curr_block] + '_main'
@@ -32,8 +37,18 @@ class AssemblyPlanner:
         # block_size = 0.04  # assuming uniform block length
         
         table_center = self.env.sim.data.get_body_xpos("table")
+
+        # Initialize base_pos and goal_area_offset
         goal_area_offset = np.array([0, 0.28, 0.025])    # looking from sideview
         base_pos = table_center + goal_area_offset
+        if self.env_name.lower() in FMB_TASKS:
+            frame_block = assembly_order[0]
+            body_name = self.block_matches[frame_block] + "_main"
+            base_pos = self.env.sim.data.get_body_xpos(body_name)
+            goal_area_offset = np.array([0, 0, 0.025])
+        
+        # Initialize new_pos
+        new_pos = base_pos
         
         block_positions = {}
         base_blocks = []

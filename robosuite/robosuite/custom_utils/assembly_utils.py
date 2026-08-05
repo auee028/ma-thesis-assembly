@@ -25,17 +25,58 @@ ENVNAME2SHAPES = {
 }
 
 # Color mapping from name to RGBA
+# COLORNAME2RGBA = {
+#     "red": [1, 0.1, 0.1, 1],
+#     "orange": [1, 0.5, 0, 1],
+#     "yellow": [1, 0.95, 0.1, 1],
+#     "green": [0.1, 0.85, 0.2, 1],
+#     "blue": [0.1, 0.1, 0.85, 1],
+#     "purple": [0.65, 0, 0.72, 1],
+# }
 COLORNAME2RGBA = {
-    "red": [1, 0.1, 0.1, 1],
-    "orange": [1, 0.5, 0, 1],
-    "yellow": [1, 0.95, 0.1, 1],
-    "green": [0.1, 0.85, 0.2, 1],
-    "blue": [0.1, 0.1, 0.85, 1],
-    "purple": [0.65, 0, 0.72, 1],
+    "red": [
+        [1.0, 0.1, 0.1, 1.0],              # original
+        [1.0, 0.16471, 0.16471, 1.0],      # fmb assembly 1
+        [1.0, 0.0, 0.0, 1.0],              # fmb assembly 2, 3
+    ],
+    "orange": [
+        [1.0, 0.5, 0.0, 1.0],
+    ],
+    "yellow": [
+        [1.0, 0.95, 0.1, 1.0],
+        [1.0, 0.88235, 0.11373, 1.0],
+        [0.93725, 0.90588, 0.02745, 1.0],   # fmb assembly 3
+    ],
+    "green": [
+        [0.1, 0.85, 0.2, 1.0],
+        [0.2549, 0.7451, 0.00784, 1.0],
+        [0.14902, 0.92157, 0.0, 1.0],
+        [0.32157, 1.0, 0.07843, 1.0],
+    ],
+    "blue": [
+        [0.1, 0.1, 0.85, 1.0],
+        [0.15294, 0.28235, 1.0, 1.0],
+        [0.13725, 0.0, 0.94902, 1.0],
+        [0.06275, 0.0, 0.9098, 1.0],
+    ],
+    "purple": [
+        [0.65, 0.0, 0.72, 1.0],
+        [0.6902, 0.30588, 1.0, 1.0],
+        [0.65882, 0.27059, 1.0, 1.0],
+        [0.49804, 0.30196, 1.0, 1.0],
+    ],
+    "brown": [
+        [0.45098, 0.24314, 0.24314, 1.0],
+    ],
 }
 
 # Color mapping from RGBA to name
-RGBA2COLORNAME = {tuple(rgba): name for name, rgba in COLORNAME2RGBA.items()}
+# RGBA2COLORNAME = {tuple(rgba): name for name, rgba in COLORNAME2RGBA.items()}
+RGBA2COLORNAME = {
+    tuple(rgba): name
+    for name, rgba_list in COLORNAME2RGBA.items()
+    for rgba in rgba_list
+}
 
 # LLM model costs 
 MODEL_COSTS = {

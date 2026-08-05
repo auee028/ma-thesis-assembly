@@ -13,12 +13,30 @@ inverse_direction = {
     "behind": "front",
     "top": "top",  # top relations are directional (asymmetric)
     "base": "base",  # base is a one-way relation
+    "inserted":"inserted",
+    "leftmost":"leftmost",
+    "rightmost":"rightmost",
+    "center":"center",
 }
 
 class AssemblySpatialGraph:
     def __init__(self):
         self.directions_2d = ["right", "left", "front", "behind"]
         self.top_alias = ["on top of", "directly supported by", "above"]
+
+        self.position_alias = [     # for fmb dataset
+            "leftmost",
+            "left",
+            "center",
+            "right",
+            "rightmost",
+            "front-left",
+            "front-right",
+            "back-left",
+            "back-right",
+            "front",
+            "back"
+        ]
         
     def __call__(self, assembly_structure):
         print(f"{bcolors.OKBLUE}[assembly_spatial_graph.py] Generating a spatial graph for the assembly structure{bcolors.RESET}")
@@ -38,38 +56,94 @@ class AssemblySpatialGraph:
         Parse the assembly structure into a structure graph
         """
         spatial_graph = defaultdict(list)  # key: block, value: list of (direction, reference_block)
-        
-        for i, instr in enumerate(assembly_structure):
-            words = instr.strip('.').split()
-            
+
+        for instr in assembly_structure:
+
+            instr = instr.lower().strip(".")
+
             try:
-                # Handle 2D direction relations
-                if i > 0 and any(f" {d} " in instr for d in self.directions_2d):
-                    pattern = fr"(block\d+).*?({'|'.join(self.directions_2d)}).*?(block\d+)"
+                # get main block
+                block_match = re.search(
+                    r"(block\d+)",
+                    instr
+                )
+
+                if not block_match:
+                    continue
+
+                block = block_match.group(1)
+
+                # fixture insertion relation
+                # e.g. block1 inserted into block0
+                inserted_match = re.search(
+                    r"inserted into (block\d+)",
+                    instr
+                )
+
+                if inserted_match:
+                    fixture = inserted_match.group(1)
+
+                    spatial_graph[block].append(
+                        ("inserted", fixture)
+                    )
+
+                # fixture relative position (of fmb)
+                # e.g. leftmost position
+                for pos in self.position_alias:
+                    if pos in instr:
+                        # if fixture exists
+                        if inserted_match:
+                            spatial_graph[block].append(
+                                (
+                                    pos,
+                                    inserted_match.group(1)
+                                )
+                            )
+
+                        break
+
+                # block-to-block directions
+                # e.g. block2 right of block1
+                for direction in self.directions_2d:
+                    pattern = (
+                        fr"(block\d+).*?"
+                        fr"{direction}.*?"
+                        fr"(block\d+)"
+                    )
                     match = re.search(pattern, instr)
-                    block, direction, ref_block = match.groups()
-                    spatial_graph[block].append((direction, ref_block))
-                
-                # Handle top relations
-                elif "on top of" in instr or "directly supported by" in instr or "above" in instr:
-                    pattern = fr"(block\d+).*?({'|'.join(self.top_alias)}).*?((?:block\d+(?:,?\s?(?:and\s)?))*block\d+)"
+
+                    if match:
+                        obj, ref = match.groups()
+
+                        spatial_graph[obj].append(
+                            (direction, ref)
+                        )
+
+                # top relation
+                if any(x in instr for x in self.top_alias):
+                    pattern = (
+                        r"(block\d+).*?"
+                        r"(?:on top of|directly supported by|above)"
+                        r".*?(block\d+)"
+                    )
                     match = re.search(pattern, instr)
-                    block, _, ref_blocks = match.groups()
-                    supporters = [b.replace(",", "") for b in ref_blocks.split(' ') if b.startswith("block")]
-                    spatial_graph[block].append(("top", *supporters))
-                
-                # Handle base placement
-                elif any(b in instr for b in BASE_BLOCK_ALIAS):
-                    # block = words[0]
-                    blocks = [w.replace(",", "") for w in words if 'block' in w]
-                    direction = "base"
-                    ref_block = "none"
-                    for block in blocks:
-                        spatial_graph[block].append((direction, ref_block))
-                
+
+                    if match:
+                        obj, ref = match.groups()
+
+                        spatial_graph[obj].append(
+                            ("top", ref)
+                        )
+
+                # base fixture
+                if "fixture" in instr and "block0" in instr:
+                    spatial_graph["block0"].append(
+                        ("base", "none")
+                    )
+
             except Exception as e:
-                print(e)
-        
+                print("[Parser error]", instr, e)
+
         return spatial_graph
         
     def _topological_sort(self, spatial_graph):
@@ -259,7 +333,7 @@ class ObjectAssemblySpatialGraph:
 
 if __name__ == "__main__":
     g = AssemblySpatialGraph()
-    
+    '''
     assembly_structure = [
         "block1 is at the base.",
         "block2 is directly supported by block1.",
@@ -319,4 +393,21 @@ if __name__ == "__main__":
     print("Assembly Structure: ", assembly_structure)
     
     spatial_graph, assembly_order = g_obj(assembly_structure)
+    '''
+
+    assembly_structure = [
+        'The frame is the base of the assembly.',
+        'block1 (pink) is inserted into the frame at the front-leftmost position.',
+        'block2 (pink) is inserted into the frame, to the right of block1.',
+        'block0 (yellow) is inserted into the frame, to the right of block2, occupying two adjacent holes in the front row.',
+        'block3 (green) is inserted into the frame, behind block1, at the back-leftmost position.',
+        'block4 (green) is inserted into the frame, to the right of block3.',
+        'block5 (blue) is inserted into the frame, to the right of block4.',
+        'block6 (blue) is inserted into the frame, to the right of block5.'
+    ]
+
+    print("Assembly Structure: ", assembly_structure)
     
+    spatial_graph, assembly_order = g_obj(assembly_structure)
+    print(spatial_graph)
+    print(assembly_order)
