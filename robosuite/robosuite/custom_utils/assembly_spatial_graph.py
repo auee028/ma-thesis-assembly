@@ -13,9 +13,7 @@ inverse_direction = {
     "behind": "front",
     "top": "top",  # top relations are directional (asymmetric)
     "base": "base",  # base is a one-way relation
-    "inserted":"inserted",
-    "leftmost":"leftmost",
-    "rightmost":"rightmost",
+    # "inserted":"inserted",
     "center":"center",
 }
 
@@ -25,17 +23,15 @@ class AssemblySpatialGraph:
         self.top_alias = ["on top of", "directly supported by", "above"]
 
         self.position_alias = [     # for fmb dataset
-            "leftmost",
-            "left",
             "center",
+            "left",
             "right",
-            "rightmost",
+            "front",
+            "back"
             "front-left",
             "front-right",
             "back-left",
             "back-right",
-            "front",
-            "back"
         ]
         
     def __call__(self, assembly_structure):
@@ -73,33 +69,14 @@ class AssemblySpatialGraph:
 
                 block = block_match.group(1)
 
-                # fixture insertion relation
-                # e.g. block1 inserted into block0
-                inserted_match = re.search(
-                    r"inserted into (block\d+)",
-                    instr
-                )
-
-                if inserted_match:
-                    fixture = inserted_match.group(1)
-
-                    spatial_graph[block].append(
-                        ("inserted", fixture)
-                    )
-
                 # fixture relative position (of fmb)
-                # e.g. leftmost position
                 for pos in self.position_alias:
                     if pos in instr:
-                        # if fixture exists
-                        if inserted_match:
+                        # assume block0 is the frame
+                        if "block0" in instr or "frame" in instr:
                             spatial_graph[block].append(
-                                (
-                                    pos,
-                                    inserted_match.group(1)
-                                )
+                                (pos, "block0")
                             )
-
                         break
 
                 # block-to-block directions
@@ -135,8 +112,8 @@ class AssemblySpatialGraph:
                             ("top", ref)
                         )
 
-                # base fixture
-                if "fixture" in instr and "block0" in instr:
+                # base board frame
+                if "frame" in instr and "block0" in instr:
                     spatial_graph["block0"].append(
                         ("base", "none")
                     )

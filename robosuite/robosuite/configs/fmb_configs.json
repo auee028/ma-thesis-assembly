@@ -1,6 +1,6 @@
 {
     "env": {
-        "env_name": "Assembly3",
+        "env_name": "Assembly1",
         "robots": "UR5e",
         "has_renderer": false,
         "has_offscreen_renderer": true,
@@ -18,9 +18,10 @@
         "target_query_structure": "assembly the blocks on the frame",
         "target_cam": "agentview",
         "target_rgb_dir": "../tmp",
-        "target_rgb_path": "../tmp/obs_rgb_init.png",
+        "target_rgb_path": "../tmp/obs_rgb_agentview.png",
         "target_depth_path": "",
-        "target_seg_path": ""
+        "target_seg_path": "",
+        "target_board_path": "../tmp/obs_rgb_birdview.png"
     },
     "llm": {
         "api_keys": {
@@ -29,8 +30,9 @@
             "google": ""
         },
         "model_config": {
-            "provider": "google",
-            "model": "gemini-2.5-flash",
+            "provider": "openai",
+            "model": "gpt-4o",
+            "reasoning_effort": "low",
             "top_p": 0.8
         },
         "token_log_dir": "./token_usage"
@@ -38,8 +40,8 @@
     "relation": {
         "dist_mode": false,
         "prim_prompt_files": {
-            "system_prompt": "../prompts/system_prompt_fmb_relation_primitives.txt",
-            "examples_prompt": "../prompts/examples_prompt.txt",
+            "system_prompt": "../prompts/system_prompt_fmb_relation_primitives_v5.txt",
+            "examples_prompt": "../prompts/examples_prompt_sandwich.txt",
             "example_rgb_paths": "../prompts/example_image_paths_rgb.txt",
             "example_depth_paths": "",
             "example_seg_paths": ""

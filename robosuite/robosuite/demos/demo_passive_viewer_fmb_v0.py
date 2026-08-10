@@ -9,7 +9,7 @@ import robosuite as suite
 from robosuite.controllers import load_composite_controller_config
 
 from robosuite.utils.camera_utils import get_camera_transform_matrix, get_real_depth_map
-from robosuite.utils.transform_utils import quat2axisangle, mat2quat
+from robosuite.utils.transform_utils import quat2axisangle, mat2quat, axisangle2quat
 
 from robosuite.custom_utils.assembly_utils import *
 
@@ -68,22 +68,51 @@ geom_names = env.sim.model.geom_names
 
 obs = env.reset()
 
-while True:
-    site_name = "gripper0_right_grip_site"
+# Adjust the camera pose so that the 'agentview' can capture all blocks on the table
+target_cam = "birdview"
+cam_id = env.sim.model.camera_name2id(target_cam)
+env.sim.model.cam_pos[cam_id] = np.array([0.6, 0, 1.45])    # agentview
+env.sim.model.cam_pos[cam_id] = np.array([-0.2, -0.15, 1.13]) # look at the board
+# Rotate camera downward
+axisangle = np.array([np.pi / 2, 0.0, 0.0])
+env.sim.model.cam_quat[cam_id] = axisangle2quat(axisangle)
+
+for i in range(env.sim.model.nsite):
+    # print(i, env.sim.model.site_id2name(i))
+    site_name = env.sim.model.site_id2name(i)
     site_id = env.sim.model.site_name2id(site_name)
+    site_pos = env.sim.data.site_xpos[site_id]
+    print(site_name, site_pos)
 
-    pos = env.sim.data.site_xpos[site_id].copy()
-    mat = env.sim.data.site_xmat[site_id].reshape(3, 3).copy()
+try:
+    while True:
+        site_name = "gripper0_right_grip_site"
+        site_id = env.sim.model.site_name2id(site_name)
 
-    quat = mat2quat(mat)
-    axis_angle = quat2axisangle(quat)
+        pos = env.sim.data.site_xpos[site_id].copy()
+        mat = env.sim.data.site_xmat[site_id].reshape(3, 3).copy()
 
-    action = np.concatenate([
-        pos,
-        axis_angle,
-        [0.0],    # gripper
-    ])
+        quat = mat2quat(mat)
+        axis_angle = quat2axisangle(quat)
 
-    obs, reward, done, info = env.step(action)
+        action = np.concatenate([
+            pos,
+            axis_angle,
+            [0.0],    # gripper
+        ])
+
+        obs, reward, done, info = env.step(action)
+except KeyboardInterrupt as e:
+    print(e)
+
+
+# Save the image of the target camera view
+rgb_cam_name = target_cam + "_image"
+env.sim.forward()
+obs = env._get_observations()
+rgb_img = obs[rgb_cam_name]  # Get image from the observation
+save_path = "capture.png"
+save_cam_image(rgb_img, save_path)
+print(f"Image saved: {'save_path'}")
     
 env.close()

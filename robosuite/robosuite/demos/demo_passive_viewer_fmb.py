@@ -9,7 +9,7 @@ import robosuite as suite
 from robosuite.controllers import load_composite_controller_config
 
 from robosuite.utils.camera_utils import get_camera_transform_matrix, get_real_depth_map
-from robosuite.utils.transform_utils import quat2axisangle, mat2quat
+from robosuite.utils.transform_utils import axisangle2quat, quat2axisangle, mat2quat
 
 from robosuite.custom_utils.assembly_llm import AssemblyLLM
 from robosuite.custom_utils.assembly_spatial_graph import AssemblySpatialGraph
@@ -48,9 +48,14 @@ env = suite.make(
 # Define camera views to capture
 camera_names = env.sim.model.camera_names
 
-# Adjust the camera pose so that the 'agentview' can capture all blocks on the table
+# Adjust the camera poses so that the cameras can capture all blocks on the table
 cam_id = env.sim.model.camera_name2id("agentview")
-env.sim.model.cam_pos[cam_id] = np.array([0.6, 0.0, 1.6])
+env.sim.model.cam_pos[cam_id] = np.array([0.6, 0, 1.45])
+
+cam_id = env.sim.model.camera_name2id("birdview")
+env.sim.model.cam_pos[cam_id] = np.array([-0.2, -0.15, 1.13]) # look down the board
+axisangle = np.array([np.pi / 2, 0.0, 0.0]) # Rotate camera downward
+env.sim.model.cam_quat[cam_id] = axisangle2quat(axisangle)
 
 # Access the geometries' names and ids
 geom_names = env.sim.model.geom_names
@@ -105,7 +110,7 @@ for cam_name in camera_names:
 """
 
 # Set up modules of LLM and Graph
-llm = AssemblyLLM(configs)
+# llm = AssemblyLLM(configs)
 g = AssemblySpatialGraph()
 
 # Iterate
@@ -140,47 +145,58 @@ for i in range(configs["num_iter"]):
         
     # Save image of the environment in each episode
     obs = env._get_observations()
-    rgb_cam_name = configs["task"]["target_cam"] + "_image"
+    # rgb_cam_name = configs["task"]["target_cam"] + "_image"
+    rgb_cam_name = "agentview" + "_image" 
     rgb_img = obs[rgb_cam_name]  # Get image from the observation
     save_path = configs["task"]["target_rgb_path"]
     save_cam_image(rgb_img, save_path)
     save_path = os.path.join(save_dir, "assembly_input_img", f"assembly_rgb_{i}.png")
     save_cam_image(rgb_img, save_path)
+
+    rgb_cam_name = "birdview" + "_image" 
+    rgb_img = obs[rgb_cam_name]  # Get image from the observation
+    save_path = configs["task"]["target_board_path"]
+    save_cam_image(rgb_img, save_path)
+    save_path = os.path.join(save_dir, "assembly_input_img", f"assembly_board_{i}.png")
+    save_cam_image(rgb_img, save_path)
     
     # Get llm response
     # detected_blocks, instructions = llm(log_res_path=os.path.join(save_dir, "log_llm_res.txt"))    # returns detected_blocks and assembly_structure
     # content = llm(log_res_path=os.path.join(save_dir, "log_llm_res.txt"))    # returns 'content' of response from LLM
+    # '''
     content = {
         "detected_blocks": [
             {
-            "block_id": "block0",
-            "color": "purple"
+                "block_id": "block0",
+                "color": "red"
             },
             {
-            "block_id": "block1",
-            "color": "brown"
+                "block_id": "block1",
+                "color": "purple"
             },
             {
-            "block_id": "block2",
-            "color": "green"
+                "block_id": "block2",
+                "color": "yellow"
             },
             {
-            "block_id": "block3",
-            "color": "red"
+                "block_id": "block3",
+                "color": "green"
             },
             {
-            "block_id": "block4",
-            "color": "blue"
+                "block_id": "block4",
+                "color": "blue"
             }
         ],
         "assembly_structure": [
-            "block0 is the purple fixture.",
-            "block3 is inserted into block0 at the leftmost position.",
-            "block1 is inserted into block0 at the left position.",
-            "block2 is inserted into block0 at the right position.",
-            "block4 is inserted into block0 at the rightmost position."
+            "block0 is the frame",
+            "block1 is left of the center of block0",
+            "block4 is right of the center of block0",
+            "block2 is at the center of block0",
+            "block3 is above block1 and block4"
         ]
     }
+
+    # '''
 
     detected_blocks = content["detected_blocks"]
     

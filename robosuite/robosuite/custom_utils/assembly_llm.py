@@ -29,7 +29,16 @@ class AssemblyLLM:
                 self.model = "gpt-4o"
             else:
                 self.model = self.llm_model
-            self.llm = OpenAI(model=self.model)
+            # self.llm = OpenAI(model=self.model)
+
+            self.reasoning_effort = self.llm_config.get("model_config", {}).get("reasoning_effort", None)
+            if self.model.startswith("gpt-5.") and self.reasoning_effort:
+                self.llm = OpenAI(
+                    model=self.model,
+                    reasoning_effort=self.reasoning_effort,
+                )
+            else:
+                self.llm = OpenAI(model=self.model)
 
         elif self.llm_provider == "mistral":
             if not self.llm_model:
@@ -67,6 +76,7 @@ class AssemblyLLM:
         
         prompt_files["target_query"] = self.config.get("task").get("target_query_structure")  # Query structure
         prompt_files["target_rgb_path"] = self.config.get("task").get("target_rgb_path")  # Image to analyze
+        prompt_files["target_board_path"] = self.config.get("task").get("target_board_path")  # Board image for FMB task
         
         return prompt_files
 
@@ -113,6 +123,7 @@ class AssemblyLLM:
         )
         target_query = self.prompt_files["target_query"]
         target_rgb_path = self.prompt_files["target_rgb_path"]
+        target_board_path = self.prompt_files["target_board_path"]
         
         # Build messages
         messages = []
@@ -149,14 +160,25 @@ class AssemblyLLM:
             messages.append(assistant_msg)
         
         # Add target query
-        query_msg = ChatMessage(
-            role=MessageRole.USER,
-            blocks=[
-                TextBlock(text=f"Analyze these blocks. Query: {target_query}"),
-                # TextBlock(text=f"Query: {target_query}"),
-                ImageBlock(path=target_rgb_path),
-            ]
-        )
+        if "assembly" in self.config.get("env").get("env_name").lower():    # for FMB tasks
+            query_msg = ChatMessage(
+                role=MessageRole.USER,
+                blocks=[
+                    TextBlock(text=f"Analyze these blocks. Query: {target_query}"),
+                    # TextBlock(text=f"Query: {target_query}"),
+                    ImageBlock(path=target_rgb_path),
+                    ImageBlock(path=target_board_path),
+                ]
+            )
+        else:
+            query_msg = ChatMessage(
+                role=MessageRole.USER,
+                blocks=[
+                    TextBlock(text=f"Analyze these blocks. Query: {target_query}"),
+                    # TextBlock(text=f"Query: {target_query}"),
+                    ImageBlock(path=target_rgb_path),
+                ]
+            )
         messages.append(query_msg)
 
         return messages

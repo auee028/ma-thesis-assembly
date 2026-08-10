@@ -24,19 +24,19 @@ class WholeBodyIKController:
             self.default_ee_quat = default_ee_pose[3:]  # w,x,y,z format
         else:
             self.default_ee_pos = [-0.2, 0.0, 0.99]
-            # self.default_ee_quat = [0.0, -1.0, 0.0, 0.0] # w,x,y,z format
+            self.default_ee_quat = [0.0, -1.0, 0.0, 0.0] # w,x,y,z format
 
-            # 1. Original default EE quaternion pointing toward the ground (wxyz -> xyzw)
-            base_default_xyzw = convert_quat(np.array([0.0, -1.0, 0.0, 0.0]), to='xyzw')
+            # # 1. Original default EE quaternion pointing toward the ground (wxyz -> xyzw)
+            # base_default_xyzw = convert_quat(np.array([0.0, -1.0, 0.0, 0.0]), to='xyzw')
 
-            # 2. -90 degree rotation quaternion about the local Z-axis
-            quat_m90_z = axisangle2quat([0, 0, -np.pi / 2])  # xyzw format
+            # # 2. -90 degree rotation quaternion about the local Z-axis
+            # quat_m90_z = axisangle2quat([0, 0, -np.pi / 2])  # xyzw format
 
-            # 3. Apply local rotation (base * rotation)
-            rotated_default_xyzw = quat_multiply(base_default_xyzw, quat_m90_z)
+            # # 3. Apply local rotation (base * rotation)
+            # rotated_default_xyzw = quat_multiply(base_default_xyzw, quat_m90_z)
 
-            # 4. Convert back to wxyz format and store
-            self.default_ee_quat = convert_quat(rotated_default_xyzw, to='wxyz')
+            # # 4. Convert back to wxyz format and store
+            # self.default_ee_quat = convert_quat(rotated_default_xyzw, to='wxyz')
         
         self._action_terminated = False
     
@@ -236,7 +236,7 @@ class WholeBodyIKController:
         # Define rotation quaternion (xyzw format)
         quat_m90_z = axisangle2quat([0, 0, -np.pi / 2])  # -90 degree rotation about the Z-axis
 
-        # Reference default orientation (wxyz -> xyzw)
+        # Pure reference default orientation (wxyz -> xyzw)
         default_quat_xyzw = convert_quat(np.array(self.default_ee_quat), to='xyzw')
 
         if self.env_name.lower() not in FMB_TASKS:
@@ -254,22 +254,25 @@ class WholeBodyIKController:
         else:
             block_name_stem = block_name.replace("_main", "")
             
+            # 1. Apply a 90-degree rotation to default_ee_quat [0, -1, 0, 0]
+            #    to obtain the "default Pick reference orientation"
+            base_pick_quat_xyzw = quat_multiply(default_quat_xyzw, quat_m90_z)
+
             if self._no_rotation_for_pick(block_name_stem):
                 # [Exception block]
-                # Grasping: keep the default_ee_quat without applying any additional rotation
-                grasp_quat_xyzw = default_quat_xyzw
-
+                # Exception block: use the default Pick reference orientation
+                # (already rotated by 90 degrees) directly for grasping
+                grasp_quat_xyzw = base_pick_quat_xyzw
             else:
                 # [General block]
-                # Grasping: rotate the default_ee_quat by -90 degrees around the Z-axis
-                # Apply the rotation as rot * base depending on local/global axis alignment
-                grasp_quat_xyzw = quat_multiply(default_quat_xyzw, quat_m90_z)
-
+                # General block: apply an additional -90-degree rotation
+                # to the default Pick reference orientation for grasping
+                grasp_quat_xyzw = quat_multiply(base_pick_quat_xyzw, quat_m90_z)
 
             # [Placing - common to all blocks]
-            # Apply an additional -90 degree rotation around the Z-axis to the grasping quaternion
+            # For placing, apply an additional -90-degree rotation
+            # from the Grasp orientation
             place_quat_xyzw = quat_multiply(grasp_quat_xyzw, quat_m90_z)
-
 
             # Convert to wxyz format for the robosuite IK controller
             grasp_quat = convert_quat(grasp_quat_xyzw, to='wxyz')
@@ -277,8 +280,6 @@ class WholeBodyIKController:
         
         # Execute movement sequence
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Moving to approach position{bcolors.RESET}")
-        # Move to the approach position
-        # Align the EE orientation with grasp_quat in advance to reduce orientation error
         self.move_to_pose(more_above_block, quaternion=grasp_quat, phase='reach', num_steps=40)
         
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Descending to block{bcolors.RESET}")
@@ -301,7 +302,7 @@ class WholeBodyIKController:
          
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Ascending from target{bcolors.RESET}")
         self.move_to_pose(more_above_target, quaternion=place_quat, phase='reach', num_steps=30)
-
+        
     
     def retrace(self, target_pos=None, target_ori=None, num_steps=50):
         """
