@@ -24,7 +24,19 @@ class WholeBodyIKController:
             self.default_ee_quat = default_ee_pose[3:]  # w,x,y,z format
         else:
             self.default_ee_pos = [-0.2, 0.0, 0.99]
-            self.default_ee_quat = [0.0, -1.0, 0.0, 0.0]  # w,x,y,z format
+            # self.default_ee_quat = [0.0, -1.0, 0.0, 0.0] # w,x,y,z format
+
+            # 1. Original default EE quaternion pointing toward the ground (wxyz -> xyzw)
+            base_default_xyzw = convert_quat(np.array([0.0, -1.0, 0.0, 0.0]), to='xyzw')
+
+            # 2. -90 degree rotation quaternion about the local Z-axis
+            quat_m90_z = axisangle2quat([0, 0, -np.pi / 2])  # xyzw format
+
+            # 3. Apply local rotation (base * rotation)
+            rotated_default_xyzw = quat_multiply(base_default_xyzw, quat_m90_z)
+
+            # 4. Convert back to wxyz format and store
+            self.default_ee_quat = convert_quat(rotated_default_xyzw, to='wxyz')
         
         self._action_terminated = False
     
@@ -174,7 +186,8 @@ class WholeBodyIKController:
             for _ in range(num_steps):
                 obs, reward, done, info = self.env.step(action)
                 self.last_ee_pos = obs['robot0_eef_pos']
-                self.last_ee_quat = convert_quat(obs['robot0_eef_quat'], to='wxyz')
+                # self.last_ee_quat = convert_quat(obs['robot0_eef_quat'], to='wxyz')
+                self.last_ee_quat = convert_quat(quat_xyzw, to='wxyz')
         else:     # More natural execution phases expected
             while not self._action_terminated:
                 obs, reward, done, info = self.env.step(action)
@@ -208,10 +221,6 @@ class WholeBodyIKController:
         block_pos = self._get_block_pos(block_name)
         block_quat = self._get_block_quat(block_name)
         
-        # Set target orientation as default if not given
-        if target_ori is None:
-            target_ori = self.default_ee_quat
-        
         # Define waypoints
         z_offset = 0.042
         above_block = block_pos.copy()
@@ -223,46 +232,63 @@ class WholeBodyIKController:
         above_target[2] += z_offset
         more_above_target = target_pos.copy()
         more_above_target[2] += 3.5 * z_offset
+
+        # Define rotation quaternion (xyzw format)
+        quat_m90_z = axisangle2quat([0, 0, -np.pi / 2])  # -90 degree rotation about the Z-axis
+
+        # Reference default orientation (wxyz -> xyzw)
+        default_quat_xyzw = convert_quat(np.array(self.default_ee_quat), to='xyzw')
+
+        if self.env_name.lower() not in FMB_TASKS:
+            block_quat_xyzw = convert_quat(block_quat, to='xyzw')
+            quat_180_x = axisangle2quat([np.pi, 0, 0])   # 180° around X-axis (flip)
+            
+            grasp_quat = convert_quat(
+                quat_multiply(quat_180_x, quat_multiply(quat_m90_z, block_quat_xyzw)),
+                to='wxyz'
+            )
+            place_quat = convert_quat(
+                quat_multiply(quat_m90_z, default_quat_xyzw),
+                to='wxyz'
+            )
+        else:
+            block_name_stem = block_name.replace("_main", "")
+            
+            if self._no_rotation_for_pick(block_name_stem):
+                # [Exception block]
+                # Grasping: keep the default_ee_quat without applying any additional rotation
+                grasp_quat_xyzw = default_quat_xyzw
+
+            else:
+                # [General block]
+                # Grasping: rotate the default_ee_quat by -90 degrees around the Z-axis
+                # Apply the rotation as rot * base depending on local/global axis alignment
+                grasp_quat_xyzw = quat_multiply(default_quat_xyzw, quat_m90_z)
+
+
+            # [Placing - common to all blocks]
+            # Apply an additional -90 degree rotation around the Z-axis to the grasping quaternion
+            place_quat_xyzw = quat_multiply(grasp_quat_xyzw, quat_m90_z)
+
+
+            # Convert to wxyz format for the robosuite IK controller
+            grasp_quat = convert_quat(grasp_quat_xyzw, to='wxyz')
+            place_quat = convert_quat(place_quat_xyzw, to='wxyz')
         
         # Execute movement sequence
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Moving to approach position{bcolors.RESET}")
-        self.move_to_pose(more_above_block, phase='reach', num_steps=40)
+        # Move to the approach position
+        # Align the EE orientation with grasp_quat in advance to reduce orientation error
+        self.move_to_pose(more_above_block, quaternion=grasp_quat, phase='reach', num_steps=40)
         
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Descending to block{bcolors.RESET}")
-        block_quat_xyzw = convert_quat(block_quat, to='xyzw')
-        quat_180_x = axisangle2quat([np.pi, 0, 0])   # 180° around X-axis (flip)
-        quat_90_z = axisangle2quat([0, 0, -np.pi / 2])   # -90° around Z-axis
-        quat_p90_z = axisangle2quat([0, 0, np.pi / 2])   # 90° around Z-axis
-
-        grasp_quat = convert_quat(
-            quat_multiply(quat_180_x, quat_multiply(quat_90_z, block_quat_xyzw)),
-            to='wxyz'
-        )
-        place_quat = convert_quat(
-            quat_multiply(quat_90_z, convert_quat(np.array(self.default_ee_quat))),
-            to='wxyz'
-        )
-        if self.env_name.lower() in FMB_TASKS:
-            grasp_quat = self.default_ee_quat
-            block_name_stem = block_name.replace("_main", "")
-            if self._no_rotation_for_pick(block_name_stem):
-                grasp_quat = convert_quat(
-                quat_multiply(quat_90_z, convert_quat(np.array(self.default_ee_quat))),
-                to='wxyz'
-            )
-
-            place_quat = convert_quat(
-                quat_multiply(quat_p90_z, convert_quat(self._get_eef_quat())),
-                to='wxyz'
-            )
-
         self.move_to_pose(block_pos, quaternion=grasp_quat, phase='reach', ori_thresh=1.6, num_steps=35)
         
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Closing gripper{bcolors.RESET}")
         self.move_to_pose(block_pos, quaternion=grasp_quat, gripper_action='close', phase='grasp', num_steps=10)
         
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Lifting block{bcolors.RESET}")
-        self.move_to_pose(more_above_block, quaternion=place_quat, gripper_action='close', block_name=block_name, phase='lift', num_steps=20)
+        self.move_to_pose(more_above_block, quaternion=grasp_quat, gripper_action='close', block_name=block_name, phase='lift', num_steps=20)
         
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Moving to target area{bcolors.RESET}")
         self.move_to_pose(more_above_target, quaternion=place_quat, phase='reach', num_steps=50)
@@ -275,6 +301,7 @@ class WholeBodyIKController:
          
         print(f"{bcolors.OKGREEN}[assembly_controller.py | {get_clock_time()}] Ascending from target{bcolors.RESET}")
         self.move_to_pose(more_above_target, quaternion=place_quat, phase='reach', num_steps=30)
+
     
     def retrace(self, target_pos=None, target_ori=None, num_steps=50):
         """
