@@ -9,10 +9,17 @@
       <body name="object">
         <geom name="visual" mesh="obj1" type="mesh" group="1" contype="0" conaffinity="0" material="mat1" />
         <geom name="collision" mesh="obj1" type="mesh" group="0" density="50" friction="0.95 0.3 0.1" solimp="0.998 0.998 0.001" solref="0.001 1" condim="4" />
+
+        <site name="bottom_site" pos="0 0 -0.025" size="0.005" rgba="0 0 0 0" />
+        <site name="top_site" pos="0 0 0.025" size="0.005" rgba="0 0 0 0" />
+        <site name="horizontal_radius_site" pos="0.03 0.03 0" size="0.005" rgba="0 0 0 0" />
+
+        <!-- ================= Board 1 Frame Holes ================= -->
+        <site name="hole_slot_center_vertical_site" pos="0 0 0.0025" size="0.017 0.0825 0.0225" rgba="1 0 0 1" type="box" />
+        <site name="hole_slot_center_horizontal_site" pos="0 0 0.020" size="0.051 0.0205 0.005" rgba="1 0 0 1" type="box" />
+        <site name="hole_slot_left_horizontal_site" pos="-0.0765 0 0.020" size="0.0255 0.0205 0.005" rgba="1 0 0 1" type="box" />
+        <site name="hole_slot_right_horizontal_site" pos="0.0765 0 0.020" size="0.0255 0.0205 0.005" rgba="1 0 0 1" type="box" />
       </body>
-      <site name="bottom_site" pos="0 0 -0.025" size="0.005" rgba="0 0 0 0" />
-      <site name="top_site" pos="0 0 0.025" size="0.005" rgba="0 0 0 0" />
-      <site name="horizontal_radius_site" pos="0.03 0.03 0" size="0.005" rgba="0 0 0 0" />
     </body>
   </worldbody>
 </mujoco>
