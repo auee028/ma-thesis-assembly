@@ -13,17 +13,17 @@ Output:
     {
       "from": "block2",    # block2 as the base block
       "to": "block1",
-      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}}
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}
     },
     {
       "from": "block2",
       "to": "block0",
-      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*2}}
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*2}
     },
     {
       "from": "block2",
       "to": "block3",
-      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*3}}
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*3}
     }
   ]
 }
@@ -42,12 +42,12 @@ Output:
     {
       "from": "block1",    # block1 as the base block
       "to": "block0",
-      "center_distance": {'x': -block_length, 'y': 0.0, 'z': 0.0}}
+      "center_distance": {'x': -block_length, 'y': 0.0, 'z': 0.0}
     },
     {
       "from": "block1",
       "to": "block2",
-      "center_distance": {'x': -block_length/2, 'y': 0.0, 'z': block_length}}
+      "center_distance": {'x': -block_length/2, 'y': 0.0, 'z': block_length}
     }
   ]
 }
@@ -67,17 +67,17 @@ Output:
     {
       "from": "block0",    # block0 as the base block
       "to": "block3",
-      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}}
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}
     },
     {
       "from": "block0",
       "to": "block2",
-      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*2}}
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*2}
     },
     {
       "from": "block0",
       "to": "block1",
-      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*3}}
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length*3}
     }
   ]
 }
@@ -97,17 +97,17 @@ Output:
     {
       "from": "block1",    # block1 as the base block
       "to": "block2",
-      "center_distance": {'x': 0.0, 'y': block_length, 'z': 0.0}}
+      "center_distance": {'x': 0.0, 'y': block_length, 'z': 0.0}
     }.
     {
       "from": "block1",
       "to": "block3",
-      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}}
+      "center_distance": {'x': 0.0, 'y': 0.0, 'z': block_length}
     },
     {
       "from": "block1",
       "to": "block0",
-      "center_distance": {'x': 0.0, 'y': block_length, 'z': block_length}}
+      "center_distance": {'x': 0.0, 'y': block_length, 'z': block_length}
     }
   ]
 }

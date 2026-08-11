@@ -11,6 +11,7 @@ PICK_ROTATION_EXCEPTIONS = {
 }
 
 
+
 class WholeBodyIKController:
     def __init__(self, env, default_ee_pose=None):
         self.env = env
@@ -57,6 +58,12 @@ class WholeBodyIKController:
         ]  # same with obs['robot0_eef_quat_site'], but in w,x,y,z format
     
     def _get_block_pos(self, block_name):
+        if self.env_name in FMB_TASKS:
+            site_name = f"{block_name.replace('_main', '')}_grip_site"
+            # print(site_name)
+            site_id = self.env.sim.model.site_name2id(site_name)
+            site_pos = self.env.sim.data.site_xpos[site_id]
+            return site_pos
         return self.env.sim.data.get_body_xpos(block_name)
     
     def _get_block_quat(self, block_name, to='wxyz'):
@@ -222,7 +229,8 @@ class WholeBodyIKController:
         block_quat = self._get_block_quat(block_name)
         
         # Define waypoints
-        z_offset = 0.042
+        # z_offset = 0.042
+        z_offset = 0.045
         above_block = block_pos.copy()
         above_block[2] += z_offset
         more_above_block = block_pos.copy()

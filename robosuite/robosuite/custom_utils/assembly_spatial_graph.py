@@ -1,5 +1,4 @@
-from collections import defaultdict, deque
-import heapq
+from collections import defaultdict
 import re
 
 from robosuite.custom_utils.voxposer_utils import get_clock_time, bcolors
@@ -9,181 +8,319 @@ from robosuite.custom_utils.assembly_utils import BASE_BLOCK_ALIAS
 inverse_direction = {
     "right": "left",
     "left": "right",
-    "front": "behind",
+    "front": "back",
+    "back": "front",
     "behind": "front",
-    "top": "top",  # top relations are directional (asymmetric)
-    "base": "base",  # base is a one-way relation
-    # "inserted":"inserted",
-    "center":"center",
+
+    # Compound directions
+    "front-left": "back-right",
+    "front-right": "back-left",
+    "back-left": "front-right",
+    "back-right": "front-left",
+
+    # Asymmetric relations
+    "above": "above",
+    "top": "top",
+
+    "base": "base",
+    "center": "center",
 }
+
 
 class AssemblySpatialGraph:
     def __init__(self):
-        self.directions_2d = ["right", "left", "front", "behind"]
-        self.top_alias = ["on top of", "directly supported by", "above"]
-
-        self.position_alias = [     # for fmb dataset
-            "center",
-            "left",
+        # IMPORTANT:
+        # Put compound directions before their component directions.
+        self.directions_2d = [
             "right",
+            "left",
             "front",
-            "back"
+            "back",
+            "behind",
             "front-left",
             "front-right",
             "back-left",
             "back-right",
         ]
-        
+
+        self.top_alias = [
+            "above",
+            "on top of",
+            "directly supported by",
+        ]
+
+        self.position_alias = [
+            "left",
+            "right",
+            "front",
+            "back",
+            "above",
+            "center",
+            "front-left",
+            "front-right",
+            "back-left",
+            "back-right",
+        ]
+
     def __call__(self, assembly_structure):
-        print(f"{bcolors.OKBLUE}[assembly_spatial_graph.py] Generating a spatial graph for the assembly structure{bcolors.RESET}")
+        print(
+            f"{bcolors.OKBLUE}"
+            "[assembly_spatial_graph.py] Generating a spatial graph "
+            f"for the assembly structure{bcolors.RESET}"
+        )
+
         directed_graph = self._get_spatial_graph(assembly_structure)
-        print("Spatial graph: ", directed_graph)
-        
-        print(f"{bcolors.OKBLUE}[assembly_spatial_graph.py] Generating the assembly order{bcolors.RESET}")
-        spatial_dag, assembly_order = self._topological_sort(directed_graph)
+        print("Spatial graph: ", dict(directed_graph))
+
+        print(
+            f"{bcolors.OKBLUE}"
+            "[assembly_spatial_graph.py] Generating the assembly order"
+            f"{bcolors.RESET}"
+        )
+
+        spatial_dag, assembly_order = self._topological_sort(
+            directed_graph
+        )
+
         print("Spatial DAG: ", spatial_dag)
         print("Assembly order: ", assembly_order)
-        
-        # return spatial_graph, assembly_order
+
         return spatial_dag, assembly_order
-        
+
     def _get_spatial_graph(self, assembly_structure):
         """
-        Parse the assembly structure into a structure graph
+        Parse assembly instructions into:
+
+            object -> [(relation, reference_object, ...)]
+
+        Examples:
+
+            block1 is left of block0
+                -> ("left", "block0")
+
+            block1 is front-left of block0
+                -> ("front-left", "block0")
+
+            block3 is above block1 and block4
+                -> ("above", "block1", "block4")
         """
-        spatial_graph = defaultdict(list)  # key: block, value: list of (direction, reference_block)
+
+        spatial_graph = defaultdict(list)
 
         for instr in assembly_structure:
 
             instr = instr.lower().strip(".")
 
             try:
-                # get main block
-                block_match = re.search(
-                    r"(block\d+)",
-                    instr
-                )
+                # ---------------------------------------------------------
+                # Get main block
+                # ---------------------------------------------------------
+                block_match = re.search(r"(block\d+)", instr)
 
                 if not block_match:
                     continue
 
                 block = block_match.group(1)
 
-                # fixture relative position (of fmb)
-                for pos in self.position_alias:
-                    if pos in instr:
-                        # assume block0 is the frame
-                        if "block0" in instr or "frame" in instr:
-                            spatial_graph[block].append(
-                                (pos, "block0")
-                            )
-                        break
-
-                # block-to-block directions
-                # e.g. block2 right of block1
-                for direction in self.directions_2d:
-                    pattern = (
-                        fr"(block\d+).*?"
-                        fr"{direction}.*?"
-                        fr"(block\d+)"
-                    )
-                    match = re.search(pattern, instr)
-
-                    if match:
-                        obj, ref = match.groups()
-
-                        spatial_graph[obj].append(
-                            (direction, ref)
-                        )
-
-                # top relation
-                if any(x in instr for x in self.top_alias):
-                    pattern = (
-                        r"(block\d+).*?"
-                        r"(?:on top of|directly supported by|above)"
-                        r".*?(block\d+)"
-                    )
-                    match = re.search(pattern, instr)
-
-                    if match:
-                        obj, ref = match.groups()
-
-                        spatial_graph[obj].append(
-                            ("top", ref)
-                        )
-
-                # base board frame
+                # ---------------------------------------------------------
+                # Base / frame
+                # ---------------------------------------------------------
                 if "frame" in instr and "block0" in instr:
                     spatial_graph["block0"].append(
                         ("base", "none")
                     )
 
+                # ---------------------------------------------------------
+                # Above / top relation
+                #
+                # Example:
+                #   block3 is above block1 and block4
+                #
+                # Result:
+                #   ("above", "block1", "block4")
+                # ---------------------------------------------------------
+                top_pattern = (
+                    r"(block\d+).*?"
+                    r"(above|on top of|directly supported by)"
+                    r"(.*)"
+                )
+
+                match = re.search(top_pattern, instr)
+
+                if match:
+                    obj = match.group(1)
+                    relation = match.group(2)
+                    remainder = match.group(3)
+
+                    ref_objs = re.findall(
+                        r"block\d+",
+                        remainder
+                    )
+
+                    if ref_objs:
+                        spatial_graph[obj].append(
+                            (relation, *ref_objs)
+                        )
+
+                    # Do not continue here because an instruction
+                    # could potentially contain other spatial relations.
+
+                # ---------------------------------------------------------
+                # Compound / 2D directions
+                #
+                # IMPORTANT:
+                # directions are checked longest-first.
+                # ---------------------------------------------------------
+                direction_pattern = (
+                    r"(block\d+).*?"
+                    r"(front-left|front-right|back-left|back-right|"
+                    r"right|left|front|back|behind)"
+                    r".*?"
+                    r"(block\d+)"
+                )
+
+                match = re.search(
+                    direction_pattern,
+                    instr
+                )
+
+                if match:
+                    obj, direction, ref_obj = match.groups()
+
+                    spatial_graph[obj].append(
+                        (direction, ref_obj)
+                    )
+
+                # ---------------------------------------------------------
+                # Center relation
+                #
+                # Example:
+                #   block2 is at the center of block0
+                #
+                # Result:
+                #   ("center", "block0")
+                # ---------------------------------------------------------
+                center_pattern = (
+                    r"(block\d+).*?"
+                    r"center.*?"
+                    r"(block\d+)"
+                )
+
+                match = re.search(
+                    center_pattern,
+                    instr
+                )
+
+                if match:
+                    obj, ref_obj = match.groups()
+
+                    spatial_graph[obj].append(
+                        ("center", ref_obj)
+                    )
+
             except Exception as e:
-                print("[Parser error]", instr, e)
+                print(
+                    "[Parser error]",
+                    instr,
+                    e
+                )
 
         return spatial_graph
-        
+
     def _topological_sort(self, spatial_graph):
         """
-        Get the assembly order (topological sort)
+        Get the assembly order while preserving spatial relations.
         """
+
         visited = set()
         visiting = set()
         order = []
-        dag = defaultdict(set)  # key: node, value: list of prerequisite nodes
-        
+
+        dag = defaultdict(set)
+
         def has_inverse(ref_obj, obj, direction):
+
             inv_dir = inverse_direction.get(direction)
+
             if inv_dir is None:
                 return False
+
             return any(
                 edge[0] == inv_dir and obj in edge[1:]
                 for edge in dag.get(ref_obj, [])
             )
 
         def dfs(obj):
+
             if obj in visited:
                 return
+
             if obj in visiting:
                 print(f"Cycle detected at {obj}")
                 return
-            
+
             visiting.add(obj)
-            
-            # Get all relationships for the current object
+
             relationships = spatial_graph.get(obj, [])
-            
+
             for relationship in relationships:
+
                 direction = relationship[0]
                 ref_objs = relationship[1:]
+
+                # -----------------------------------------------------
+                # Base relation
+                # -----------------------------------------------------
+                if ref_objs == ("none",):
+
+                    dag[obj].add(
+                        ("base", "")
+                    )
+
+                    continue
+
+                # -----------------------------------------------------
+                # Add complete relationship.
+                #
+                # For example:
+                #
+                # ("above", "block1", "block4")
+                #
+                # stays exactly as it is.
+                # -----------------------------------------------------
+                if not has_inverse(
+                    ref_objs[0],
+                    obj,
+                    direction
+                ):
+                    dag[obj].add(
+                        tuple(
+                            [direction] + list(ref_objs)
+                        )
+                    )
+
+                # -----------------------------------------------------
+                # Recursively visit all reference blocks
+                # -----------------------------------------------------
                 for ref_obj in ref_objs:
-                    # Add 'base' object with supporter 'none' — it's not a real object, just a placeholder
-                    if ref_obj == "none":
-                        dag[obj].add(tuple([direction] + [ref_obj]))
-                        continue    # Skip 'none' not to be added in order
-                    # Build DAG: Skip if inverse edge already exists
-                    elif not has_inverse(ref_obj, obj, direction):
-                        dag[obj].add(tuple([direction] + [ob for ob in ref_objs]))
-                        
                     dfs(ref_obj)
-                    
+
                     if obj not in order:
                         order.append(obj)
-                        
+
             visiting.remove(obj)
             visited.add(obj)
-            # order.append(obj)
+
             if obj not in order:
                 order.append(obj)
-            
-        # Keep the objects in the same order they appeared
-        all_objs = list(spatial_graph.keys())
-        
-        # DFS to get the order
-        for obj in all_objs:
+
+        for obj in spatial_graph.keys():
             dfs(obj)
 
-        return {k: list(v) for k, v in dag.items()}, order  # No reversal needed for 'order'
+        return (
+            {k: list(v) for k, v in dag.items()},
+            order
+        )
 
 
 class ObjectAssemblySpatialGraph:

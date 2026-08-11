@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="obj2">
+  <asset>
+    <mesh name="obj2" file="obj2.obj" scale="0.001 0.001 0.001" />
+    <material name="mat2" rgba="0.32157 1 0.07843 1" />
+  <mesh name="obj1_p0" file="obj2_part_0.obj" scale="0.001 0.001 0.001" /></asset>
+  <worldbody>
+    <body>
+      <body name="object">
+        <inertial pos="0 0 0" mass="0.1" diaginertia="0.0001 0.0001 0.0001" /><geom name="visual" mesh="obj2" type="mesh" group="1" contype="0" conaffinity="0" material="mat2" />
+        <geom name="col_0" mesh="obj1_p0" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat2" />
+        <site name="grip_site" pos="0 0 0.01" size="0.008" rgba="1 0 0 1" />
+      </body>
+      <site name="bottom_site" pos="0 0 -0.025" size="0.005" rgba="0 0 0 0" />
+      <site name="top_site" pos="0 0 0.025" size="0.005" rgba="0 0 0 0" />
+      <site name="horizontal_radius_site" pos="0.03 0.03 0" size="0.005" rgba="0 0 0 0" />
+    </body>
+  </worldbody>
+</mujoco>

@@ -113,7 +113,7 @@ class AssemblyPlanner:
                         supp_pos = block_positions[supps[0]]
                         new_pos = supp_pos + np.array([0.0, 0.0, block_size[2]])
                     elif len(supps) > 1:
-                        assert relation == "top"
+                        assert relation == "above"
                         supp1, supp2 = block_positions[supps[0]], block_positions[supps[1]]
                         avg_pos = (supp1 + supp2) / 2
                         avg_pos[2] += block_size[2]
@@ -132,27 +132,27 @@ class AssemblyPlanner:
                         keyword = "left"
                         # Returns the list value, or None if no key contains the keyword
                         hole_site_pos = next((val for key, val in self.hole_sites.items() if keyword in key), None)
-                        new_pos = hole_site_pos + np.array([0.0, 0.0, block_size[2] / 2])
+                        new_pos = hole_site_pos # + np.array([0.0, 0.0, block_size[2] / 2])
                     # right hole: ('right', 'center') multiple relations or 'right' included
                     elif "right" in rel_types:
                         keyword = "right"
                         hole_site_pos = next((val for key, val in self.hole_sites.items() if keyword in key), None)
-                        new_pos = hole_site_pos + np.array([0.0, 0.0, block_size[2] / 2])
+                        new_pos = hole_site_pos # + np.array([0.0, 0.0, block_size[2] / 2])
                     # front hole: ('front', 'center') multiple relations or 'front' included
                     elif "front" in rel_types:
                         keyword = "front"
                         hole_site_pos = next((val for key, val in self.hole_sites.items() if keyword in key), None)
-                        new_pos = hole_site_pos + np.array([0.0, 0.0, block_size[2] / 2])
+                        new_pos = hole_site_pos # + np.array([0.0, 0.0, block_size[2] / 2])
                     # behind hole: ('behind', 'center') multiple relations or 'behind' included
                     elif "behind" in rel_types:
                         keyword = "behind"
                         hole_site_pos = next((val for key, val in self.hole_sites.items() if keyword in key), None)
-                        new_pos = hole_site_pos + np.array([0.0, 0.0, block_size[2] / 2])
+                        new_pos = hole_site_pos # + np.array([0.0, 0.0, block_size[2] / 2])
                     # center hole: only 'center'
                     elif "center" in rel_types:
                         keyword = "center"
                         hole_site_pos = next((val for key, val in self.hole_sites.items() if keyword in key), None)
-                        new_pos = hole_site_pos + np.array([0.0, 0.0, block_size[2] / 2])
+                        new_pos = hole_site_pos # + np.array([0.0, 0.0, block_size[2] / 2])
                     else:
                         new_pos = base_pos
 
@@ -167,10 +167,17 @@ class AssemblyPlanner:
                         new_pos = supp_pos + np.array([0.0, block_size[1], 0.0])
                     elif "behind" in rel_types:
                         new_pos = supp_pos + np.array([0.0, -block_size[1], 0.0])
-                    # elif "above" in rel_types:
-                    #     new_pos = block_positions
-                    else:
+                    elif "top" in rel_types and len(supporters) == 1:
+                        supp_pos = block_positions[supporters[0]]
                         new_pos = supp_pos + np.array([0.0, 0.0, block_size[2]])
+                    elif len(supporters) > 1:
+                        assert relation == "above"
+                        supp1, supp2 = block_positions[supporters[0]], block_positions[supporters[1]]
+                        avg_pos = (supp1 + supp2) / 2
+                        avg_pos[2] += block_size[2]
+                        new_pos = avg_pos
+                    else:
+                        new_pos = base_pos
 
             block_positions[block] = new_pos
         

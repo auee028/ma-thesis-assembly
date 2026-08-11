@@ -1,0 +1,67 @@
+### Example 1
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_1}}"
+Query: "tower"
+Output:
+{
+  "detected_objects": [
+    {"id": "object0", "color": "orange", "name": "cube0"},
+    {"id": "object1", "color": "yellow", "name": "cube1"},
+    {"id": "object2", "color": "green", "name": "cube2"}
+  ],
+  "assembly_structure": [
+    "object2 is at the bottom.",
+    "object0 is on top of object2.",
+    "object1 is on top of object0."
+  ]  
+}
+
+### Example 2
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_2}}"
+Query: "pyramid"
+Output:
+{
+  "detected_objects": [
+    {"id": "object0", "color": "yellow", "name": "cube0"},
+    {"id": "object1", "color": "purple", "name": "cube1"},
+    {"id": "object2", "color": "orange", "name": "cube2"}
+  ],
+  "assembly_structure": [
+    "object1 is on the table.",
+    "object0 is left of object1.",
+    "object2 is above object1 and object0."
+  ]  
+}
+
+### Example 3
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_3}}"
+Query: "tower"
+Output:
+{
+  "detected_objects": [
+    {"id": "object0", "color": "blue", "name": "cube0"},
+    {"id": "object1", "color": "red", "name": "cube1"}
+  ],
+  "assembly_structure": [
+    "object0 is at the base.",
+    "object1 is directly supported by object0."
+  ]  
+}
+
+### Example 4
+Input Image: "data:image/png;base64,{{BASE64_IMAGE_4}}"
+Query: "vertically stacked square"
+Output:
+{
+  "detected_objects": [
+    {"id": "object0", "color": "green", "name": "cube0"},
+    {"id": "object1", "color": "purple", "name": "cube1"},
+    {"id": "object2", "color": "orange", "name": "cube2"},
+    {"id": "object3", "color": "red", "name": "cube3"}
+  ],
+  "assembly_structure": [
+    "object2 is at the base.",
+    "object0 is right of object2.",
+    "object3 is on top of object0.",
+    "object1 is on top of object2."
+  ]  
+}

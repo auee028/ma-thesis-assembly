@@ -267,23 +267,28 @@ class Assembly1(ManipulationEnv):
         # initialize the objects of FMB Assembly 1
         self.obj1 = FMBObject(
             name="obj1",	# red (frame)
-            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj1.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj1.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj1/obj1.xml",
         )
         self.obj2 = FMBObject(
             name="obj2",	# purple
-            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj2.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj2.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj2/obj2.xml",
         )
         self.obj3 = FMBObject(
             name="obj3",	# yellow
-            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj3.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj3.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj3/obj3.xml",
         )
         self.obj4 = FMBObject(
             name="obj4",	# green
-            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj4.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj4.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj4/obj4.xml",
         )
         self.obj5 = FMBObject(
             name="obj5",	# blue
-            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj5.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj5.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj5/obj5.xml",
         )
         
         self.objects = [self.obj1, self.obj2, self.obj3, self.obj4, self.obj5]

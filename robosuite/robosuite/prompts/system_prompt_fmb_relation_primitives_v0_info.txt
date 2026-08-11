@@ -40,35 +40,45 @@ For each block:
 
 ---
 
-## 2. Understand the Fixture and Target Locations
+## 2. Understand the Fixture and Target Hole Locations
 
-The assembly is performed by inserting blocks into the peg-and-hole fixture.
+The assembly uses block0 as a peg-and-hole fixture. Movable blocks are inserted into holes on block0.
 
-Treat block0 as the fixture reference frame.
+First analyze the hole pattern of block0.
 
-Before describing the assembly:
+The fixture may contain different hole layouts. Identify the relative locations of holes using qualitative spatial descriptions only.
 
-1. Analyze the hole pattern of block0.
-2. Determine which hole location corresponds to each block.
-3. Assign each movable block to its target location on block0.
+Allowed hole location descriptions:
 
-Do NOT use numerical coordinates or hole indices.
+- Horizontal layout:
+  - left position
+  - center position
+  - right position
 
-Instead, describe target locations using qualitative spatial terms.
+- Vertical/perpendicular layout:
+  - front position
+  - center position
+  - back position
 
-Allowed fixture-relative locations:
-
-- leftmost position
-- left position
-- center position
-- right position
-- rightmost position
-- front position
-- back position
+Combined positions:
 - front-left position
+- front-center position
 - front-right position
 - back-left position
+- back-center position
 - back-right position
+
+If a hole lies at the intersection of two axes, use the combined description.
+
+Do not use:
+- numerical coordinates
+- hole indices
+- pixel locations
+
+For each movable block:
+1. Determine which hole of block0 it is inserted into.
+2. Describe the target location relative to block0.
+3. Use the fixture as the reference frame.
 
 ---
 
@@ -78,47 +88,28 @@ Describe the assembly from the base fixture upward.
 
 Use only the following spatial relationship primitives.
 
-### A. Block-to-fixture relationships
+### A. Block insertion into fixture
 
-Use these when a block is inserted into the fixture.
+Use this relation when a movable block occupies a hole on block0.
 
-Allowed terms:
+Format:
 
-- "inserted into"
+"blockX is inserted into block0 at the [target location] position."
 
 Examples:
 
-- block1 is inserted into block0.
-- block2 is inserted into block0 at the right position.
+- block1 is inserted into block0 at the left position.
+- block2 is inserted into block0 at the center position.
+- block3 is inserted into block0 at the front-right position.
 
 Meaning:
-- block0 provides the fixture/hole support.
-- The movable block is attached to the fixture.
+- block0 is the supporting fixture.
+- blockX occupies a specific hole on block0.
+- The target location refers only to the hole location on block0.
 
 ---
 
-### B. Fixture-relative target position
-
-Describe where a block is placed on block0.
-
-Allowed terms:
-
-- "at the leftmost position of"
-- "at the left position of"
-- "at the center position of"
-- "at the right position of"
-- "at the rightmost position of"
-- "at the front position of"
-- "at the back position of"
-
-Examples:
-
-- block1 is inserted into block0 at the leftmost position.
-- block3 is inserted into block0 at the back-right position.
-
----
-
-### C. Block-to-block relationships
+### B. Block-to-block relationships
 
 Use these when describing relative positions between blocks.
 
@@ -138,7 +129,7 @@ Examples:
 
 ---
 
-### D. Multiple support relationships
+### C. Multiple support relationships
 
 When a block is supported upward by multiple adjacent blocks:
 
@@ -149,6 +140,36 @@ Use:
 Example:
 
 - block5 is above block2 and block3.
+
+---
+
+## D. Known Fixture Hole Patterns
+
+When identifying block0, consider the following possible patterns:
+
+Red board:
+- Four insertion holes:
+  - left position on the vertical body
+  - center position on the vertical body
+  - right position on the vertical body
+  - center position on the horizontal body
+
+Purple board:
+- Four insertion holes:
+  - left position on the vertical body
+  - center position on the vertical body
+  - right position on the vertical body
+  - center position on the horizontal body
+
+Yellow board:
+- Four insertion holes:
+  - left position on the vertical body
+  - right position on the vertical body
+  - front position on the horizontal body
+  - back position on the horizontal body
+
+Use only the hole locations visible in the image.
+Do not assume a hole exists if it is not visible.
 
 ---
 

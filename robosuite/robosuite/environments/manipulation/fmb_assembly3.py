@@ -263,26 +263,31 @@ class Assembly3(ManipulationEnv):
         # Arena always gets set to zero origin
         mujoco_arena.set_origin([0, 0, 0])
 
-        # initialize the objects of FMB Assembly 1
+        # initialize the objects of FMB Assembly 3
         self.obj1 = FMBObject(
             name="obj1",
-            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj1.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj1.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj1/obj1.xml",
         )
         self.obj2 = FMBObject(
             name="obj2",
-            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj2.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj2.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj2/obj2.xml",
         )
         self.obj3 = FMBObject(
             name="obj3",
-            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj3.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj3.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj3/obj3.xml",
         )
         self.obj4 = FMBObject(
             name="obj4",
-            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj4.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj4.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj4/obj4.xml",
         )
         self.obj5 = FMBObject(
             name="obj5",
-            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj5.xml",
+            # fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj5.xml",
+            fmb_xml_file="custom_objects/fmb/meshes/assembly3/obj5/obj5.xml",
         )
         
         self.objects = [self.obj1, self.obj2, self.obj3, self.obj4, self.obj5]
