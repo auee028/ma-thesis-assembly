@@ -3,21 +3,206 @@
   <asset>
     <mesh name="obj1" file="obj1.obj" scale="0.001 0.001 0.001" />
     <material name="mat1" rgba="0.93725 0.90588 0.02745 1" />
-  <mesh name="obj1_p0" file="obj1_part_0.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p1" file="obj1_part_1.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p2" file="obj1_part_10.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p3" file="obj1_part_11.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p4" file="obj1_part_12.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p5" file="obj1_part_13.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p6" file="obj1_part_14.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p7" file="obj1_part_15.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p8" file="obj1_part_16.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p9" file="obj1_part_17.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p10" file="obj1_part_18.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p11" file="obj1_part_19.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p12" file="obj1_part_2.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p13" file="obj1_part_20.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p14" file="obj1_part_21.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p15" file="obj1_part_22.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p16" file="obj1_part_23.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p17" file="obj1_part_24.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p18" file="obj1_part_25.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p19" file="obj1_part_26.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p20" file="obj1_part_27.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p21" file="obj1_part_28.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p22" file="obj1_part_29.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p23" file="obj1_part_3.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p24" file="obj1_part_30.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p25" file="obj1_part_31.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p26" file="obj1_part_32.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p27" file="obj1_part_33.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p28" file="obj1_part_34.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p29" file="obj1_part_35.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p30" file="obj1_part_36.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p31" file="obj1_part_37.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p32" file="obj1_part_38.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p33" file="obj1_part_39.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p34" file="obj1_part_4.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p35" file="obj1_part_40.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p36" file="obj1_part_41.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p37" file="obj1_part_42.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p38" file="obj1_part_43.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p39" file="obj1_part_44.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p40" file="obj1_part_45.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p41" file="obj1_part_46.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p42" file="obj1_part_47.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p43" file="obj1_part_48.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p44" file="obj1_part_49.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p45" file="obj1_part_5.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p46" file="obj1_part_50.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p47" file="obj1_part_51.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p48" file="obj1_part_52.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p49" file="obj1_part_6.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p50" file="obj1_part_7.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p51" file="obj1_part_8.obj" scale="0.001 0.001 0.001" /><mesh name="obj1_p52" file="obj1_part_9.obj" scale="0.001 0.001 0.001" /></asset>
+    <mesh name="obj1_p0" file="obj1_part_0.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p1" file="obj1_part_1.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p2" file="obj1_part_2.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p3" file="obj1_part_3.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p4" file="obj1_part_4.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p5" file="obj1_part_5.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p6" file="obj1_part_6.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p7" file="obj1_part_7.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p8" file="obj1_part_8.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p9" file="obj1_part_9.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p10" file="obj1_part_10.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p11" file="obj1_part_11.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p12" file="obj1_part_12.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p13" file="obj1_part_13.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p14" file="obj1_part_14.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p15" file="obj1_part_15.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p16" file="obj1_part_16.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p17" file="obj1_part_17.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p18" file="obj1_part_18.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p19" file="obj1_part_19.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p20" file="obj1_part_20.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p21" file="obj1_part_21.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p22" file="obj1_part_22.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p23" file="obj1_part_23.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p24" file="obj1_part_24.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p25" file="obj1_part_25.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p26" file="obj1_part_26.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p27" file="obj1_part_27.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p28" file="obj1_part_28.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p29" file="obj1_part_29.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p30" file="obj1_part_30.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p31" file="obj1_part_31.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p32" file="obj1_part_32.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p33" file="obj1_part_33.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p34" file="obj1_part_34.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p35" file="obj1_part_35.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p36" file="obj1_part_36.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p37" file="obj1_part_37.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p38" file="obj1_part_38.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p39" file="obj1_part_39.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p40" file="obj1_part_40.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p41" file="obj1_part_41.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p42" file="obj1_part_42.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p43" file="obj1_part_43.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p44" file="obj1_part_44.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p45" file="obj1_part_45.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p46" file="obj1_part_46.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p47" file="obj1_part_47.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p48" file="obj1_part_48.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p49" file="obj1_part_49.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p50" file="obj1_part_50.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p51" file="obj1_part_51.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p52" file="obj1_part_52.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p53" file="obj1_part_53.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p54" file="obj1_part_54.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p55" file="obj1_part_55.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p56" file="obj1_part_56.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p57" file="obj1_part_57.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p58" file="obj1_part_58.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p59" file="obj1_part_59.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p60" file="obj1_part_60.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p61" file="obj1_part_61.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p62" file="obj1_part_62.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p63" file="obj1_part_63.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p64" file="obj1_part_64.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p65" file="obj1_part_65.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p66" file="obj1_part_66.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p67" file="obj1_part_67.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p68" file="obj1_part_68.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p69" file="obj1_part_69.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p70" file="obj1_part_70.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p71" file="obj1_part_71.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p72" file="obj1_part_72.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p73" file="obj1_part_73.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p74" file="obj1_part_74.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p75" file="obj1_part_75.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p76" file="obj1_part_76.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p77" file="obj1_part_77.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p78" file="obj1_part_78.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p79" file="obj1_part_79.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p80" file="obj1_part_80.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p81" file="obj1_part_81.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p82" file="obj1_part_82.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p83" file="obj1_part_83.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p84" file="obj1_part_84.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p85" file="obj1_part_85.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p86" file="obj1_part_86.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p87" file="obj1_part_87.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p88" file="obj1_part_88.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p89" file="obj1_part_89.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p90" file="obj1_part_90.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p91" file="obj1_part_91.obj" scale="0.001 0.001 0.001" />
+    <mesh name="obj1_p92" file="obj1_part_92.obj" scale="0.001 0.001 0.001" />
+  </asset>
   <worldbody>
     <body>
       <body name="object">
-        <inertial pos="0 0 0" mass="0.1" diaginertia="0.0001 0.0001 0.0001" /><geom name="visual" mesh="obj1" type="mesh" group="1" contype="0" conaffinity="0" material="mat1" />
+        <inertial pos="0 0 0" mass="0.1" diaginertia="0.0001 0.0001 0.0001" />
+        <geom name="visual" mesh="obj1" type="mesh" group="1" contype="0" conaffinity="0" material="mat1" />
         <site name="bottom_site" pos="0 0 -0.025" size="0.005" rgba="0 0 0 0" />
         <site name="top_site" pos="0 0 0.025" size="0.005" rgba="0 0 0 0" />
         <site name="horizontal_radius_site" pos="0.03 0.03 0" size="0.005" rgba="0 0 0 0" />
-
-        
         <site name="hole_slot_left_site" pos="0.034 0 0.0125" size="0.0115 0.068 0.0125" rgba="1 0 0 0.5" type="box" />
         <site name="hole_slot_right_site" pos="-0.034 0 0.0125" size="0.0115 0.068 0.0125" rgba="1 0 0 0.5" type="box" />
         <site name="hole_trident_front_site" pos="0 0.0515 0" size="0.0795 0.03325 0.0125" rgba="0 1 0 0.5" type="box" />
         <site name="hole_trident_back_site" pos="0 -0.0515 0" size="0.0795 0.03325 0.0125" rgba="0 0 1 0.5" type="box" />
-      <geom name="col_0" mesh="obj1_p0" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_1" mesh="obj1_p1" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_2" mesh="obj1_p2" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_3" mesh="obj1_p3" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_4" mesh="obj1_p4" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_5" mesh="obj1_p5" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_6" mesh="obj1_p6" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_7" mesh="obj1_p7" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_8" mesh="obj1_p8" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_9" mesh="obj1_p9" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_10" mesh="obj1_p10" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_11" mesh="obj1_p11" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_12" mesh="obj1_p12" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_13" mesh="obj1_p13" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_14" mesh="obj1_p14" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_15" mesh="obj1_p15" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_16" mesh="obj1_p16" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_17" mesh="obj1_p17" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_18" mesh="obj1_p18" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_19" mesh="obj1_p19" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_20" mesh="obj1_p20" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_21" mesh="obj1_p21" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_22" mesh="obj1_p22" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_23" mesh="obj1_p23" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_24" mesh="obj1_p24" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_25" mesh="obj1_p25" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_26" mesh="obj1_p26" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_27" mesh="obj1_p27" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_28" mesh="obj1_p28" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_29" mesh="obj1_p29" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_30" mesh="obj1_p30" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_31" mesh="obj1_p31" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_32" mesh="obj1_p32" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_33" mesh="obj1_p33" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_34" mesh="obj1_p34" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_35" mesh="obj1_p35" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_36" mesh="obj1_p36" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_37" mesh="obj1_p37" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_38" mesh="obj1_p38" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_39" mesh="obj1_p39" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_40" mesh="obj1_p40" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_41" mesh="obj1_p41" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_42" mesh="obj1_p42" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_43" mesh="obj1_p43" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_44" mesh="obj1_p44" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_45" mesh="obj1_p45" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_46" mesh="obj1_p46" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_47" mesh="obj1_p47" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_48" mesh="obj1_p48" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_49" mesh="obj1_p49" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_50" mesh="obj1_p50" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_51" mesh="obj1_p51" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /><geom name="col_52" mesh="obj1_p52" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" /></body>
+        <geom name="col_0" mesh="obj1_p0" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_1" mesh="obj1_p1" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_2" mesh="obj1_p2" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_3" mesh="obj1_p3" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_4" mesh="obj1_p4" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_5" mesh="obj1_p5" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_6" mesh="obj1_p6" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_7" mesh="obj1_p7" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_8" mesh="obj1_p8" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_9" mesh="obj1_p9" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_10" mesh="obj1_p10" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_11" mesh="obj1_p11" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_12" mesh="obj1_p12" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_13" mesh="obj1_p13" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_14" mesh="obj1_p14" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_15" mesh="obj1_p15" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_16" mesh="obj1_p16" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_17" mesh="obj1_p17" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_18" mesh="obj1_p18" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_19" mesh="obj1_p19" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_20" mesh="obj1_p20" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_21" mesh="obj1_p21" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_22" mesh="obj1_p22" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_23" mesh="obj1_p23" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_24" mesh="obj1_p24" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_25" mesh="obj1_p25" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_26" mesh="obj1_p26" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_27" mesh="obj1_p27" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_28" mesh="obj1_p28" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_29" mesh="obj1_p29" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_30" mesh="obj1_p30" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_31" mesh="obj1_p31" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_32" mesh="obj1_p32" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_33" mesh="obj1_p33" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_34" mesh="obj1_p34" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_35" mesh="obj1_p35" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_36" mesh="obj1_p36" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_37" mesh="obj1_p37" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_38" mesh="obj1_p38" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_39" mesh="obj1_p39" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_40" mesh="obj1_p40" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_41" mesh="obj1_p41" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_42" mesh="obj1_p42" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_43" mesh="obj1_p43" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_44" mesh="obj1_p44" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_45" mesh="obj1_p45" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_46" mesh="obj1_p46" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_47" mesh="obj1_p47" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_48" mesh="obj1_p48" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_49" mesh="obj1_p49" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_50" mesh="obj1_p50" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_51" mesh="obj1_p51" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_52" mesh="obj1_p52" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_53" mesh="obj1_p53" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_54" mesh="obj1_p54" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_55" mesh="obj1_p55" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_56" mesh="obj1_p56" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_57" mesh="obj1_p57" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_58" mesh="obj1_p58" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_59" mesh="obj1_p59" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_60" mesh="obj1_p60" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_61" mesh="obj1_p61" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_62" mesh="obj1_p62" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_63" mesh="obj1_p63" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_64" mesh="obj1_p64" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_65" mesh="obj1_p65" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_66" mesh="obj1_p66" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_67" mesh="obj1_p67" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_68" mesh="obj1_p68" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_69" mesh="obj1_p69" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_70" mesh="obj1_p70" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_71" mesh="obj1_p71" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_72" mesh="obj1_p72" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_73" mesh="obj1_p73" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_74" mesh="obj1_p74" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_75" mesh="obj1_p75" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_76" mesh="obj1_p76" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_77" mesh="obj1_p77" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_78" mesh="obj1_p78" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_79" mesh="obj1_p79" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_80" mesh="obj1_p80" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_81" mesh="obj1_p81" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_82" mesh="obj1_p82" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_83" mesh="obj1_p83" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_84" mesh="obj1_p84" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_85" mesh="obj1_p85" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_86" mesh="obj1_p86" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_87" mesh="obj1_p87" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_88" mesh="obj1_p88" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_89" mesh="obj1_p89" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_90" mesh="obj1_p90" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_91" mesh="obj1_p91" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+        <geom name="col_92" mesh="obj1_p92" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />
+      </body>
     </body>
   </worldbody>
 </mujoco>

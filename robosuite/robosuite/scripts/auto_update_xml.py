@@ -7,7 +7,11 @@ def auto_update_xml(xml_path, parts_dir, output_xml_path=None):
         output_xml_path = xml_path
 
     # List up and sort split obj files
-    part_files = sorted(glob.glob(os.path.join(parts_dir, "*_part_*.obj")))
+    # part_files = sorted(glob.glob(os.path.join(parts_dir, "*_part_*.obj")))
+    part_files = sorted(
+        glob.glob(os.path.join(parts_dir, "*_part_*.obj")),
+        key=lambda x: int(os.path.basename(x).split("_part_")[-1].split(".obj")[0])
+    )
     print(f"Total of {len(part_files)} parts found.")
 
     # Parse XML file
@@ -75,7 +79,8 @@ def auto_update_xml(xml_path, parts_dir, output_xml_path=None):
 
         ET.SubElement(body, "geom", geom_kwargs)
 
-    # 5. Save XML
+    # 5. Pretty-print and save XML
+    ET.indent(tree, space="  ")
     tree.write(output_xml_path, encoding="utf-8", xml_declaration=True)
     print(f"Successfully updated {output_xml_path} file!")
 
