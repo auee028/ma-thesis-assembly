@@ -26,6 +26,7 @@ from robosuite.environments.manipulation.big_house_pillars import BigHousePillar
 from robosuite.environments.manipulation.fmb_assembly1 import Assembly1
 from robosuite.environments.manipulation.fmb_assembly2 import Assembly2
 from robosuite.environments.manipulation.fmb_assembly3 import Assembly3
+from robosuite.environments.manipulation.fmb_simple_demo1 import AssemblySimpleDemo1
 
 from robosuite.environments import ALL_ENVIRONMENTS
 from robosuite.controllers import (

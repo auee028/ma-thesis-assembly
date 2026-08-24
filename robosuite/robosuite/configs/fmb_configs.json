@@ -1,6 +1,6 @@
 {
     "env": {
-        "env_name": "Assembly1",
+        "env_name": "AssemblySimpleDemo1",
         "robots": "UR5e",
         "has_renderer": false,
         "has_offscreen_renderer": true,
