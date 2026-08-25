@@ -266,17 +266,16 @@ class AssemblySimpleDemo1(ManipulationEnv):
 
         # initialize the objects of FMB Assembly 1
         self.obj1 = FMBObject(
-            name="obj1",	# red (frame)
+            name="obj1",	# frame
             fmb_xml_file="custom_objects/fmb/meshes/simple_demo1/obj1/obj1.xml",
         )
         self.obj2 = FMBObject(
-            name="obj2",	# purple
-            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj2/obj2.xml",
+            name="obj2",	# u-shaped block
+            fmb_xml_file="custom_objects/fmb/meshes/simple_demo1/obj2/obj2.xml",
         )
         self.obj3 = FMBObject(
-            name="obj3",	# yellow
-            # fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj3.xml",
-            fmb_xml_file="custom_objects/fmb/meshes/assembly1/obj3/obj3.xml",
+            name="obj3",	# u-shaped block
+            fmb_xml_file="custom_objects/fmb/meshes/simple_demo1/obj3/obj3.xml",
         )
         
         self.objects = [self.obj1, self.obj2, self.obj3]
@@ -454,8 +453,8 @@ class AssemblySimpleDemo1(ManipulationEnv):
         # 			robot
         placements = {
             self.obj1: [-0.2, -0.15, self.table_offset[2] + 0.02], # [-0.2, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
-            self.obj2: [0.12, -0.24, self.table_offset[2] + 0.045], # [0.1, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
-            self.obj3: [0.12, -0.105, self.table_offset[2] + 0.0135], # [0.1, -0.15, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj2: [0.12, -0.12, self.table_offset[2] + 0.045], # [0.1, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj3: [0.12, 0.07, self.table_offset[2] + 0.04], # [0.1, -0.15, self.table_offset[2] -0.005] (before recentering .obj file)
         }
 
         for i, (obj, pos) in enumerate(placements.items()):

@@ -121,7 +121,7 @@ rgb_cam_name = target_cam + "_image"
 env.sim.forward()
 obs = env._get_observations()
 rgb_img = obs[rgb_cam_name]
-save_path = "capture.png"
+save_path = "board.png"
 save_cam_image(rgb_img, save_path)
 print(f"Image saved: {save_path}")
 

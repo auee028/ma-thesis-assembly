@@ -12,6 +12,7 @@ def decompose_and_generate_xml(obj_path, output_dir):
     # 2. Execute CoACD  (Convex Decomposition)
     # The lower the threshold value is, the more sophisticated it is split (default 0.05)
     coacd_mesh = coacd.Mesh(mesh.vertices, mesh.faces)
+    # parts = coacd.run_coacd(coacd_mesh, threshold=0.05)
     parts = coacd.run_coacd(coacd_mesh, threshold=0.01)
     
     # 3. Save the split meshes in .obj files
@@ -43,18 +44,22 @@ def decompose_and_generate_xml(obj_path, output_dir):
     #     print(f'<geom name="col_{i}" mesh="{base_name}_p{i}" type="mesh" group="0" contype="1" conaffinity="1" friction="0.95 0.3 0.1" solimp="0.9 0.95 0.001" solref="0.02 1" condim="4" material="mat1" />')
 
     # 4. Run auto_update_xml.py
-    
+
 
 if __name__ == "__main__":
     # Enter the .obj file path
-    tasks = ["assembly1", "assembly2", "assembly3"]
+    # tasks = ["assembly1", "assembly2", "assembly3"]
+    tasks = [f"simple_demo{i}" for i in range(1, 5)]
+
     for task in tasks:
         obj_dir = f"../models/assets/custom_objects/fmb/meshes/{task}"
 
-        num_obj = 5
+        _, dirs, _ = next(os.walk(obj_dir))
+        num_obj = len(dirs)
         for i in range(1, num_obj+1):
             out_dir = os.path.join(obj_dir, f"obj{i}")  # "decomposed parts"
             decompose_and_generate_xml(
-                obj_path=os.path.join(obj_dir, f"obj{i}.obj"),
+                # obj_path=os.path.join(obj_dir, f"obj{i}.obj"),
+                obj_path=os.path.join(obj_dir, f"obj{i}", f"obj{i}.obj"),
                 output_dir=out_dir
             )

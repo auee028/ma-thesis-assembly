@@ -85,12 +85,16 @@ def auto_update_xml(xml_path, parts_dir, output_xml_path=None):
     print(f"Successfully updated {output_xml_path} file!")
 
 if __name__ == "__main__":
-    tasks = ["assembly1", "assembly2", "assembly3"]
+    # tasks = ["assembly1", "assembly2", "assembly3"]
+    tasks = [f"simple_demo{i}" for i in range(1, 5)]
     for task in tasks:
         asset_dir = f"../models/assets/custom_objects/fmb/meshes/{task}/"
-        obj_num = 5
+
+        _, dirs, _ = next(os.walk(asset_dir))
+        obj_num = len(dirs)
         for n in range(1, obj_num+1):
-            input_xml_dir = os.path.join(asset_dir, f"obj{n}.xml")
+            # input_xml_dir = os.path.join(asset_dir, f"obj{n}.xml")
+            input_xml_dir = os.path.join(asset_dir, f"obj{n}", f"obj{n}.xml")
             parts_dir = os.path.join(asset_dir, f"obj{n}")
             output_xml_path = os.path.join(parts_dir, f"obj{n}.xml")
 

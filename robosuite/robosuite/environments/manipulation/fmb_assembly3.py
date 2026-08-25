@@ -448,10 +448,10 @@ class Assembly3(ManipulationEnv):
         # 			robot
         placements = {
             self.obj1: [-0.2, -0.15, self.table_offset[2] + 0.02], # [-0.2, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
-            self.obj2: [0.12, -0.22, self.table_offset[2] + 0.01], # [0.1, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
-            self.obj3: [0.12, 0.0, self.table_offset[2] + 0.01], # [0.1, -0.15, self.table_offset[2] -0.005] (before recentering .obj file)
-            self.obj4: [0.12, 0.15, self.table_offset[2] + 0.045], # [0.1, 0.0, self.table_offset[2] -0.005] (before recentering .obj file)
-            self.obj5: [0.12, 0.3, self.table_offset[2] + 0.045], # [0.1, 0.15, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj2: [0.07, -0.15, self.table_offset[2] + 0.008], # [0.1, -0.3, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj3: [0.18, -0.15, self.table_offset[2] + 0.008], # [0.1, -0.15, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj4: [0.12, 0.06, self.table_offset[2] + 0.045], # [0.1, 0.0, self.table_offset[2] -0.005] (before recentering .obj file)
+            self.obj5: [0.12, 0.2, self.table_offset[2] + 0.045], # [0.1, 0.15, self.table_offset[2] -0.005] (before recentering .obj file)
         }
 
         for i, (obj, pos) in enumerate(placements.items()):
